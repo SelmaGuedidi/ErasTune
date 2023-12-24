@@ -1,5 +1,5 @@
 {
-  "name": "angular-github-actions",
+  "name": "ErasTune",
   "version": "1.0.0",
   "description": "Application example built with Angular 15 and hosted on GitHub Pages using GitHub Actions.",
   "author": "(https://github.com/SelmaGuedidi)",
@@ -9,7 +9,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:prod": "ng build --configuration production --base-href https://SelmaGuedidi.github.io/angular-github-actions/",
+    "build:prod": "ng build --configuration production --base-href https://SelmaGuedidi.github.io/ErasTune/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:headless": "ng test --watch=false --browsers=ChromeHeadless"
