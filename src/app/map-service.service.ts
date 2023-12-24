@@ -42,7 +42,7 @@ export class MapService {
       .attr('width', w)
       .attr('height', h+100)
 
-     .call(d3.zoom().scaleExtent([1, 20]).translateExtent([[0, 0], [w+160, h+250]]).on('zoom', this.zoomed.bind(this)))
+     .call(d3.zoom().scaleExtent([1, 20]).translateExtent([[0, 0], [w+200, h+250]]).on('zoom', this.zoomed.bind(this)))
       .append('g')
      
       ;
