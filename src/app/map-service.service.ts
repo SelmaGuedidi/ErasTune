@@ -42,13 +42,13 @@ export class MapService {
       .attr('width', w)
       .attr('height', h+100)
 
-     .call(d3.zoom().scaleExtent([1, 20]).translateExtent([[0, 0], [w+80, h+150]]).on('zoom', this.zoomed.bind(this)))
+     .call(d3.zoom().scaleExtent([1, 20]).translateExtent([[0, 0], [w+160, h+250]]).on('zoom', this.zoomed.bind(this)))
       .append('g')
      
       ;
   let body=d3.select("body")
-  .style("width", windowWidth)
-  .style("height", windowHeight+100)
+  .style("width", w)
+  .style("height", h+200)
   .style("margin", "0")
   .style("padding", "0");
       
