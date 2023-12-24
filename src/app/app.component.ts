@@ -7,7 +7,7 @@ import { MapService } from './map-service.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit{
-  title = 'angular-github-actions';
+  title = 'Eras Tune';
   countriesGroup: d3.Selection<SVGGElement, unknown, HTMLElement, any> | undefined;
 
   constructor(private mapService: MapService,private renderer: Renderer2) { }
