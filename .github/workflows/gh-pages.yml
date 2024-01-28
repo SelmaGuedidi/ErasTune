@@ -3,7 +3,7 @@ name: GitHub Pages
 on:
   push:
     branches:
-    - main
+      - main
 
 jobs:
   deploy:
@@ -12,14 +12,17 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: Delete Assets Folder
+      if: github.ref == 'refs/heads/main'
+      run: rm -rf assets
+
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: 20
 
     - name: Install dependencies
       run: npm install
-
 
     - name: Build
       run: npm run build:prod
