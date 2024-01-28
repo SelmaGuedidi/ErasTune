@@ -14,7 +14,7 @@ export class MapService {
   constructor(private http: HttpClient) { }
 
   loadMapData(windowWidth, windowHeight): void {
-    this.http.get('https://raw.githubusercontent.com/aourednik/historical-basemaps/master/geojson/world_1994.geojson')
+    this.http.get('https://raw.githubusercontent.com/SelmaGuedidi/ErasTune/dev/src/assets/maps/world_2010.geojson')
       .subscribe((json: any) => {
         this.drawMap(json,windowWidth, windowHeight);
       });
@@ -51,6 +51,8 @@ export class MapService {
   .style("height", h+200)
   .style("margin", "0")
   .style("padding", "0");
+  const countryColors = ['#fce4c4', '#fbf3dc', '#fbd4c3', '#cce4d4','#e6e1ce'];
+  let currentColor = '#7cc0d8';
       
     this.countriesGroup.append('rect').attr('x', 0).attr('y', 0).attr('width', w+40).attr('height', h+150).attr('fill', (d: any) => {
    
@@ -62,8 +64,9 @@ export class MapService {
       .enter()
       .append('path')
       .attr('fill', (d: any) => {
-        // Set a default color for countries
-        return '#d0d0d0';
+      
+        const randomColor = countryColors[Math.floor(Math.random() * countryColors.length)];
+    return randomColor;
       })
       .style('stroke', '#2A2C39') // Set the stroke color
   .style('stroke-width', '0.5')
@@ -73,12 +76,15 @@ export class MapService {
       .on('mouseover', (event, d: any) => {
         const countryName = d.properties.NAME ? d.properties.NAME : '';
         this.showTooltip(countryName, event);
+        const hoveredCountryId = 'country' + d.properties.NAME;
+        d3.select(`#${hoveredCountryId}`).attr('fill', '#f4bcbc');
       })
       .on('click', (d: any) => {
         console.log("click");
       })
       .on('mouseout', () => {
         this.hideTooltip();
+        
       });
   
    
