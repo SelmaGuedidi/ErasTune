@@ -7,10 +7,11 @@ import * as d3 from 'd3';
 @Injectable({
   providedIn: 'root'
 })
+
 export class MapService {
   private countriesGroup: any;
 
-
+  
   constructor(private http: HttpClient) { }
 
   loadMapData(windowWidth, windowHeight): void {
