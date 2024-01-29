@@ -43,7 +43,7 @@ export class MapService {
       .attr('width', w)
       .attr('height', h+100)
 
-     .call(d3.zoom().scaleExtent([1, 20]).translateExtent([[0, 0], [w+200, h+250]]).on('zoom', this.zoomed.bind(this)))
+     .call(d3.zoom().scaleExtent([1, 20]).translateExtent([[0, 0], [w+200, h+220]]).on('zoom', this.zoomed.bind(this)))
       .append('g')
      
       ;
@@ -53,7 +53,7 @@ export class MapService {
   .style("margin", "0")
   .style("padding", "0");
   const countryColors = ['#fce4c4', '#fbf3dc', '#fbd4c3', '#cce4d4','#e6e1ce'];
-  let currentColor = '#7cc0d8';
+  
       
     this.countriesGroup.append('rect').attr('x', 0).attr('y', 0).attr('width', w+40).attr('height', h+150).attr('fill', (d: any) => {
    
