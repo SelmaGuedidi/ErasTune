@@ -13,6 +13,7 @@ import { MusicplayerComponent } from './components/musicplayer/musicplayer.compo
 
 
 import {SplashScreenComponent} from './components/splash-screen/splash-screen.component'
+import { StepperComponent } from './components/stepper/stepper.component';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import {SplashScreenComponent} from './components/splash-screen/splash-screen.co
         ZoomComponent,
         MapComponent,
         MusicplayerComponent,
-        SplashScreenComponent
+        StepperComponent,
+        SplashScreenComponent,
+        
 
     ],
     providers: [MapService,ZoomService],
