@@ -1,5 +1,4 @@
 
-@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 .album-title{
     color:black;
     margin-top:20px;
@@ -32,7 +31,7 @@
   bottom:0;
   left:5%;
   z-index: 10;
-  
+
   width: 90%;
   justify-self: center;
   justify-content: center;
@@ -75,13 +74,13 @@
   object-fit: cover;
   height: 180px;
   width: 180px;
-  
+
   position: absolute;
   bottom: 0;
   left: 5%;
   animation: rotate 3s linear infinite;
   animation-play-state: paused;
-  
+
 
 }
 
@@ -171,7 +170,7 @@
   display: flex;
   flex-direction: row;
   color:black
- 
+
 }
 
 .volume-slider {
@@ -211,6 +210,7 @@
 
   cursor: pointer;
 }
+
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     input[type='range'] {
@@ -253,3 +253,4 @@ input[type="range"]::-ms-fill-lower {
 input[type="range"]::-ms-fill-upper {  
   background-color: #9a905d;
 }
+

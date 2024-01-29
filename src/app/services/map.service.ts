@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as d3 from 'd3';
+import { BehaviorSubject } from 'rxjs';
 
 
 
@@ -10,8 +11,10 @@ import * as d3 from 'd3';
 
 export class MapService {
   private countriesGroup: any;
+  private countryClickedSource = new BehaviorSubject<string | null>(null);
+  countryClicked$ = this.countryClickedSource.asObservable();
 
-  
+
   constructor(private http: HttpClient) { }
 
   loadMapData(windowWidth, windowHeight): void {
@@ -31,10 +34,10 @@ export class MapService {
       .translate([w / 2, h / 2]);
 
     const path = d3.geoPath().projection(projection);
-    
-    
-     
-   
+
+
+
+
     this.countriesGroup = d3.select('#map-holder')
     .attr('width', w)
     .attr('height', h)
@@ -45,7 +48,7 @@ export class MapService {
 
      .call(d3.zoom().scaleExtent([1, 20]).translateExtent([[0, 0], [w+200, h+220]]).on('zoom', this.zoomed.bind(this)))
       .append('g')
-     
+
       ;
   let body=d3.select("body")
   .style("width", w)
@@ -53,10 +56,10 @@ export class MapService {
   .style("margin", "0")
   .style("padding", "0");
   const countryColors = ['#fce4c4', '#fbf3dc', '#fbd4c3', '#cce4d4','#e6e1ce'];
-  
-      
+
+
     this.countriesGroup.append('rect').attr('x', 0).attr('y', 0).attr('width', w+40).attr('height', h+150).attr('fill', (d: any) => {
-   
+
       return '#7cc0d8';
     });
     console.log(json.features)
@@ -65,7 +68,7 @@ export class MapService {
       .enter()
       .append('path')
       .attr('fill', (d: any) => {
-      
+
         const randomColor = countryColors[Math.floor(Math.random() * countryColors.length)];
     return randomColor;
       })
@@ -81,15 +84,16 @@ export class MapService {
         d3.select(`#${hoveredCountryId}`).attr('fill', '#f4bcbc');
       })
       .on('click', (d: any) => {
-        console.log("click");
+        console.log(d.srcElement.__data__.properties.NAME);
+        this.countryClickedSource.next(d.srcElement.__data__.properties.NAME);
       })
       .on('mouseout', () => {
         this.hideTooltip();
-        
+
       });
-  
-   
-     
+
+
+
   }
   private zoomed(event: any): void {
     this.countriesGroup.attr('transform', event.transform);
@@ -101,7 +105,7 @@ export class MapService {
       .style('left', (event.pageX ) + 'px')
       .style('top', (event.pageY ) + 'px');
   }
-  
+
   // Function to hide tooltip
   private hideTooltip(): void {
     const tooltip = d3.select('#tooltip');

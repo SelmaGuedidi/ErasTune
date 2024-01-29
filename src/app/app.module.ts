@@ -1,4 +1,4 @@
-import { Input, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ZoomComponent } from "./components/zoom/zoom.component";
 import { ZoomService } from './services/zoom.service';
 import { MapComponent } from './components/map/map.component';
-
+import { LandingpageComponent } from './components/landingpage/landingpage.component';
 import { MusicplayerComponent } from './components/musicplayer/musicplayer.component';
 
 
@@ -18,13 +18,14 @@ import { StepperComponent } from './components/stepper/stepper.component';
 
 @NgModule({
     declarations: [
-      AppComponent,
+        AppComponent,
         ZoomComponent,
         MapComponent,
         MusicplayerComponent,
         StepperComponent,
         SplashScreenComponent,
-        
+        LandingpageComponent
+
 
     ],
     providers: [MapService,ZoomService],
@@ -35,6 +36,7 @@ import { StepperComponent } from './components/stepper/stepper.component';
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
+
 
     ]
 })

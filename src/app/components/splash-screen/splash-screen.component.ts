@@ -12,6 +12,6 @@ export class SplashScreenComponent {
     // Simulate animation duration, then emit event
     setTimeout(() => {
       this.zoom="zoom-out";
-    },2000); // Adjust the time based on your actual animation duration
+    },5000); // Adjust the time based on your actual animation duration
   }
 }

@@ -16,7 +16,7 @@ export class AppComponent {
     // setTimeout(() => {
     //   this.showSplashScreen = false;
     // }, 3000);
-    this.showSplashScreen$.pipe(delay(3000)).subscribe(() => {
+    this.showSplashScreen$.pipe(delay(6000)).subscribe(() => {
       this.showSplashScreen$.next(false);
     });
   }

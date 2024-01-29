@@ -1,3 +1,4 @@
+import { MapService } from 'src/app/services/map.service';
 import { Component } from '@angular/core';
 
 export interface AudioModel {
@@ -37,8 +38,7 @@ export class MusicplayerComponent {
     this.audio.src = this.songSources[this.currentSongIndex];
     this.audio.volume=0.5
     this.audio.addEventListener('timeupdate', () => {
-      this.progress = (this.audio?.currentTime || 0) / (this.audio?.duration || 1) * 100;
-      
+    this.progress = (this.audio?.currentTime || 0) / (this.audio?.duration || 1) * 100;
     });
   }
   onMouseDown(event: MouseEvent): void {
@@ -66,12 +66,12 @@ export class MusicplayerComponent {
     this.audio.currentTime = (newPosition / 100) * this.audio.duration;
     this.progress = newPosition;
   }
-  
+
   updateVolume(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.audio.volume=parseInt(target.value) / 100;
     console.log(parseInt(target.value) / 100 )
-   
+
   }
 
   playPause(): void {
@@ -107,4 +107,8 @@ export class MusicplayerComponent {
     const formattedMinutes = String(minutes).padStart(2, '0');
     const formattedSeconds = String(remainingSeconds).padStart(2, '0');
     return `${formattedMinutes}:${formattedSeconds}`;
-  }}
+  }
+
+
+
+}
