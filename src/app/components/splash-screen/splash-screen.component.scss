@@ -8,18 +8,15 @@
 }
 
 .splash-screen.zoom-out {
-  transform: scale(0.8);
-  transition: transform 1.5s ease-in-out; /* Add transition for zoom-out */
+  transform: scale(1.5);
+  transition: transform 1.3s ease-in-out; /* Add transition for zoom-out */
 }
-
-/* Rest of your CSS */
 
 
 .content {
   text-align: center;
 }
 
-/* Smaller logo */
 .logo-container {
   display: inline-block;
   overflow: hidden;
