@@ -8,7 +8,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ZoomComponent } from "./components/zoom/zoom.component";
 import { ZoomService } from './services/zoom.service';
 import { MapComponent } from './components/map/map.component';
+
 import { MusicplayerComponent } from './components/musicplayer/musicplayer.component';
+
+
+import {SplashScreenComponent} from './components/splash-screen/splash-screen.component'
 
 
 @NgModule({
@@ -16,7 +20,9 @@ import { MusicplayerComponent } from './components/musicplayer/musicplayer.compo
       AppComponent,
         ZoomComponent,
         MapComponent,
-        MusicplayerComponent
+        MusicplayerComponent,
+        SplashScreenComponent
+
     ],
     providers: [MapService,ZoomService],
     bootstrap: [
@@ -26,9 +32,9 @@ import { MusicplayerComponent } from './components/musicplayer/musicplayer.compo
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-       
+
     ]
 })
 export class AppModule {
-  
+
 }
