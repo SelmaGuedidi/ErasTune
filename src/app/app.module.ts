@@ -8,13 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ZoomComponent } from "./components/zoom/zoom.component";
 import { ZoomService } from './services/zoom.service';
 import { MapComponent } from './components/map/map.component';
-
+import {SplashScreenComponent} from './components/splash-screen/splash-screen.component'
 
 @NgModule({
     declarations: [
       AppComponent,
         ZoomComponent,
-        MapComponent
+        MapComponent,
+        SplashScreenComponent
     ],
     providers: [MapService,ZoomService],
     bootstrap: [
@@ -24,9 +25,9 @@ import { MapComponent } from './components/map/map.component';
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-       
+
     ]
 })
 export class AppModule {
-  
+
 }
