@@ -1,7 +1,4 @@
 
-
 <app-splash-screen *ngIf="showSplashScreen$ | async"></app-splash-screen>
-<app-map [zoom]="zoomService.zoom" *ngIf="!(showSplashScreen$ | async)" [zoom]="zoomService.zoom"></app-map>
-<app-zoom></app-zoom>
-<app-musicplayer/>
+<app-landingpage  *ngIf="!(showSplashScreen$ | async)"></app-landingpage>
 

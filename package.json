@@ -25,6 +25,7 @@
     "@angular/router": "^17.1.1",
     "@material/slider": "^14.0.0",
     "d3": "^7.8.5",
+    "font-awesome": "^4.7.0",
     "rxjs": "~7.8.0",
     "slider": "^1.0.4",
     "tslib": "^2.5.0",
