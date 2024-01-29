@@ -1,0 +1,49 @@
+<!-- audio-player.component.html -->
+
+<div class="audio-container">
+    <div class="img-container">
+      <img  [src]="songImages[currentSongIndex]" alt="music-cover" id="cover">
+      
+    </div>
+    <p class="album-title" id="album-title">{{ songDetails[currentSongIndex].album }}</p>
+  
+  
+    <p class="song-title"  id="title">{{ songDetails[currentSongIndex].name }}</p>
+    <p class="artist-title" id="artist">{{ songDetails[currentSongIndex].artist }}</p>
+<div class="progress-info-container">
+    <div class="time-info">
+        {{ formatTime(audio.currentTime || 0) }} 
+      </div>
+      <div class="progress-container" id="progress-container"
+     (mousedown)="onMouseDown($event)"
+     (mousemove)="onMouseMove($event)"
+     (mouseup)="onMouseUp()">
+  <div class="progress" id="progress" [style.width]="progress + '%'"></div>
+  <div class="current-time-circle" [style.left]="progress + '%'"></div>
+</div>
+      
+    <div class="time-info">
+        {{ formatTime(audio.duration || 0) }}
+    </div>
+    <div class="volume-container">
+        <i class="fa fa-volume-up" aria-hidden="true"></i>
+        <input type="range" class="volume-slider"  [value]="audio.volume * 100"  (input)="updateVolume($event)">
+    </div>
+  
+   
+</div>
+    <audio [src]="audio.src" id="audio"></audio>
+  
+    <div class="navigation">
+      <button id="prev" class="action-btn" (click)="prevSong()">
+        <i class="fa fa-step-backward"></i>
+      </button>
+      <button id="play" class="action-btn action-btn-big" (click)="playPause()">
+        <i [class]="isPlaying ? 'fa fa-pause' : 'fa fa-play'"></i>
+      </button>
+      <button id="next" class="action-btn" (click)="nextSong()">
+        <i class="fa fa-step-forward"></i>
+      </button>
+    </div>
+  </div>
+  
