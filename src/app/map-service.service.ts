@@ -1,6 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as d3 from 'd3';
+import { MusicPlayerService } from './services/music-player.service';
+import { Observable, catchError, map, of, switchMap, tap } from 'rxjs';
+import { Song } from './model/song';
 
 
 
@@ -10,10 +13,14 @@ import * as d3 from 'd3';
 export class MapService {
   private countriesGroup: any;
 
+  songs_obs$ : Observable<Song[]>
+  songs : Song[]
 
+  musicPlayerService = inject(MusicPlayerService)
   constructor(private http: HttpClient) { }
 
   loadMapData(windowWidth, windowHeight): void {
+  
     this.http.get('https://raw.githubusercontent.com/aourednik/historical-basemaps/master/geojson/world_1994.geojson')
       .subscribe((json: any) => {
         this.drawMap(json,windowWidth, windowHeight);
@@ -56,7 +63,7 @@ export class MapService {
    
       return '#7cc0d8';
     });
-    console.log(json.features)
+    //console.log(json.features)
     const countries = this.countriesGroup.selectAll('path')
       .data(json.features)
       .enter()
@@ -68,15 +75,47 @@ export class MapService {
       .style('stroke', '#2A2C39') // Set the stroke color
   .style('stroke-width', '0.5')
       .attr('d', (d: any) => path(d) as string)
-      .attr('id', (d: any) => { console.log(d.properties.NAME);return 'country' + d.properties.NAME?d.properties.NAME:""})
+      .attr('id', (d: any) => { /*console.log(d.properties.NAME);return 'country' + d.properties.NAME?d.properties.NAME:""*/})
       .attr('class', 'country')
       .on('mouseover', (event, d: any) => {
         const countryName = d.properties.NAME ? d.properties.NAME : '';
         this.showTooltip(countryName, event);
       })
-      .on('click', (d: any) => {
-        console.log("click");
-      })
+      .on('click', (event,d: any) => {
+        const countryName = d.properties.WB_CNTR ? d.properties.WB_CNTR : '';
+        console.log("acessing music player service in 1950 for ",countryName);
+        // Define the observable without subscribing
+
+        this.songs_obs$ = this.musicPlayerService.getMusicByCountryAndYear(countryName, 1950).pipe(
+          map(tracks => {
+            if (tracks && tracks.songs) {
+              console.log("Data retrieved " + tracks.id);
+              tracks.songs.forEach(song => {
+                console.log("Track: " + song["Song Name"]);
+              });
+              return tracks.songs;  // Return the songs array
+            } else {
+              console.error("Invalid response format");
+              return [];  // Return an empty array or handle it as needed
+            }
+          }),
+          catchError(error => {
+            console.error("Error fetching data:", error);
+            return of([]);  // Return an empty array or handle the error as needed
+          })
+        );
+        this.songs_obs$.subscribe(songs => {
+          console.log('Received songs:', songs);
+          this.songs = songs
+        });
+
+        this.songs.forEach(element => {
+          console.log("songs :: ",element)
+
+        });
+        
+
+      }) 
       .on('mouseout', () => {
         this.hideTooltip();
       });
