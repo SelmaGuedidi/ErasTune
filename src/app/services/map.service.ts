@@ -78,9 +78,10 @@ countryClicked$ = this.countryClickedSource.asObservable();
       .attr('height', h+100)
 
      .call(d3.zoom().scaleExtent([1, 20]).translateExtent([[0, 0], [w+200, h+220]]).on('zoom', this.zoomed.bind(this)))
-      .append('g')
+     .append('g')
+     .attr('transform', 'translate(-200, 0)');
 
-      ;
+      
   let body=d3.select("body")
   .style("width", w)
   .style("height", h+200)
