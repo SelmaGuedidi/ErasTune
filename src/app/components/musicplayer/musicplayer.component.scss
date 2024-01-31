@@ -1,24 +1,27 @@
 
 .album-title{
     color:black;
-    margin-top:20px;
+    margin-top:10px;
     font-family:Poppins;
-    font-size: 42;
+    font-size: 46;
     font-weight: 900;
+    text-shadow: 0.5px 0.5px #7cc0d8;
 }
 .song-title{
     color:black;
-    margin-top:-20px;
+    margin-top:-10px;
     font-family:Poppins;
-    font-size: 42;
+    font-size: 46;
     font-weight: 900;
+    text-shadow: 0.5px 0.5px #7cc0d8;
 }
 .artist-title{
     color:black;
-    margin-top:-20px;
+    margin-top:-10px;
     font-family:Poppins;
-    font-size: 42;
+    font-size: 46;
     font-weight: 900;
+    text-shadow: 0.5px 0.5px #7cc0d8;
 }
 .audio-container{
   color:#fff;
@@ -125,28 +128,6 @@
   outline: 0;
 }
 
-/* .audio-info {
-  background-color: #fff;
-  border-radius: 15px 15px 0 0;
-  position: absolute;
-  top: 0;
-  left: 20px;
-  width: calc(100% - 40px);
-  padding: 10px 10px 10px 150px;
-  opacity: 0;
-  transform: translateY(0%);
-  transition: transform 0.3s ease-in, opacity 0.3s ease-in;
-  z-index: 0;
-}
-
-.audio-container.play .audio-info {
-  opacity: 1;
-  transform: translateY(-100%);
-}
-
-.audio-info h4 {
-  margin: 0;
-} */
 
 .progress-container {
   background: grey;
