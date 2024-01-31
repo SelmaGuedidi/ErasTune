@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { DidyouknowService } from 'src/app/services/didyouknow.service';
 import { MapService } from 'src/app/services/map.service';
 import { ZoomService } from 'src/app/services/zoom.service';
-
 
 @Component({
   selector: 'app-landingpage',
@@ -12,7 +12,7 @@ export class LandingpageComponent{
 showMusicPlayer = false;
 
 
-constructor(public zoomService: ZoomService, public mapService: MapService){}
+constructor(public zoomService: ZoomService, public mapService: MapService,private didYouKnowService: DidyouknowService){}
 ngOnInit(): void {
   this.mapService.countryClicked$.subscribe((country) => {
     // console.log(country);
@@ -20,5 +20,10 @@ ngOnInit(): void {
     this.showMusicPlayer = country !== null;
   });
 }
-
+getDidYouKnow(): void {
+  this.didYouKnowService.getDidYouKnow("Tunisia",2000).subscribe(response => {
+    console.log(response);
+  });
+  // console.log(this.didYouKnowService.chat("Tunisia",2000));
+}
 }

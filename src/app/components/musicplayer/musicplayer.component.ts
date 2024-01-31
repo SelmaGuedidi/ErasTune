@@ -24,7 +24,7 @@ export class MusicplayerComponent {
   isDragging = false;
   progress: number = 0;
 
-  
+
 
   songSources: string[] = [
     // 'https://d24jd2l6qnq89g.cloudfront.net/USA/1950/856bfb54-9313-4c04-9376-12168f4e4fc2.mp3?Expires=1706130377359628&Key-Pair-Id=APKAJP5ZLPWNV42F3CCQ&Signature=R-qixwCWewAzidZf1~vm4BbysqBZRGjlaRxpo6Bm-LyXua7qdQ1N8F2gYqSOrCd8TXG5TMqYCx3FIw9kD~aMe8h61oC4zr6RM1kyvD-CV~PHGu4n90xXSx~6sPlzsqPK3n2zqd8XFsAWzoqWbDJMl6u1G06Ionc9dj8JfDTQgGKNz-M0~UMavHJMo0RniIS1LiELcVbyt1nmjExsKiCWzJbP1U6fLQoa~2Up5sDgz0Zeq4SF4LIvmVnRWr0tCo1LcMQTfLrACeGfndsrPr7K5snHrlH8OkPlOlWbFt4PkfiAdxpkTCjICX7zvn-Gzn08IrxPssA7pP0INAr4eRjNyw__',
@@ -46,7 +46,7 @@ export class MusicplayerComponent {
   constructor(){
 
     this.mapService.countryClicked$.subscribe((country) => {
-    
+
       console.log("in country observer")
       console.log("country changed : ", country)
       var decade = this.mapService.decadeClickedSource.value
@@ -72,21 +72,21 @@ export class MusicplayerComponent {
             this.songImages = []
             // this.mapService.countryClickedSource.next(null);
           }
-            
+
         }),
         catchError(error => {
         console.error("Error fetching data:", error);
         this.toast.error("error fetching data")
         return of([]);  // Return an empty array or handle the error as needed
         })
-          
+
       ).subscribe(()=>{this.changeSong()})
-      
+
     })
 
-    
+
     this.mapService.decadeClicked$.subscribe((decade) => {
-    
+
       console.log("in decade observer")
       console.log("decade changed : ", decade)
       var country = this.mapService.countryClickedSource.value
@@ -112,21 +112,21 @@ export class MusicplayerComponent {
             this.songImages = []
             // this.mapService.decadeClickedSource.next(null);
           }
-            
+
         }),
         catchError(error => {
         console.error("Error fetching data:", error);
         this.toast.error("error fetching data")
         return of([]);  // Return an empty array or handle the error as needed
         })
-          
+
       ).subscribe(()=>{this.changeSong()})
-      
+
     })
 
 
-    }  
-  
+    }
+
 
   ngOnInit(): void {
     this.audio = new Audio();

@@ -8,9 +8,6 @@ import { Song } from '../Models/song';
 import { ToastrService } from 'ngx-toastr';
 
 
-
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +17,7 @@ export class MapService {
 
   countryClickedSource = new BehaviorSubject<String | null>(null);
   countryClicked$ = this.countryClickedSource.asObservable();
-  
+
   decadeClickedSource = new BehaviorSubject<number>(1980);
   decadeClicked$ = this.decadeClickedSource.asObservable();
 
@@ -85,7 +82,7 @@ export class MapService {
     return randomColor;
       })
       .style('stroke', '#2A2C39') // Set the stroke color
-  .style('stroke-width', '0.5')
+      .style('stroke-width', '0.5')
       .attr('d', (d: any) => path(d) as string)
       .attr('id', (d: any) => { /*console.log(d.properties.NAME);return 'country' + d.properties.NAME?d.properties.NAME:""*/})
       .attr('class', 'country')
@@ -96,11 +93,11 @@ export class MapService {
         d3.select(`#${hoveredCountryId}`).attr('fill', '#f4bcbc');
       })
       .on('click', (d: any) => {
-        var countryName = d.srcElement.__data__.properties.WB_CNTR ? d.srcElement.__data__.properties.WB_CNTR : ''
+        var countryName = d.srcElement.__data__.properties.NAME ? d.srcElement.__data__.properties.NAME : ''
         if (countryName == ''){
 
-          this.toast.error("coutnry not found")       
-        
+          this.toast.error("coutnry not found")
+
         }
         else {
           console.log("acessing music player service in", this.decadeClickedSource.value ,"for ",countryName);
