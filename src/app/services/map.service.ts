@@ -121,14 +121,8 @@ countryClicked$ = this.countryClickedSource.asObservable();
         d3.select(`#${hoveredCountryId}`).attr('fill', '#f4bcbc');
       })
       .on('click', (d: any) => {
-<<<<<<< HEAD
-        var countryName = d.srcElement.__data__.properties.NAME ? d.srcElement.__data__.properties.NAME : ''
-        if (countryName == ''){
-=======
         var countryABBREVN = d.srcElement.__data__.properties.ABBREVN ? d.srcElement.__data__.properties.ABBREVN : ''
         if (countryABBREVN == ''){
-
->>>>>>> 1b78fde7edd8a0ae92e5642be4774490a8bcabe9
           this.toast.error("coutnry not found")       
         }
         else {
