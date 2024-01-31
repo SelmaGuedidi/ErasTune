@@ -3,8 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import * as d3 from 'd3';
 import { BehaviorSubject } from 'rxjs';
 import { MusicPlayerService } from './music-player.service';
-import { Observable, catchError, map, of } from 'rxjs';
-import { Song } from '../Models/song';
+
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -15,25 +14,51 @@ import { ToastrService } from 'ngx-toastr';
 export class MapService {
   private countriesGroup: any;
 
+<<<<<<< HEAD
   countryClickedSource = new BehaviorSubject<String | null>(null);
   countryClicked$ = this.countryClickedSource.asObservable();
 
+=======
+  countryClickedSource = new BehaviorSubject<string[] | null>(null);
+countryClicked$ = this.countryClickedSource.asObservable(); 
+  
+>>>>>>> 1b78fde7edd8a0ae92e5642be4774490a8bcabe9
   decadeClickedSource = new BehaviorSubject<number>(1980);
   decadeClicked$ = this.decadeClickedSource.asObservable();
 
+  country_to_json={
+    "1950":"1945",
+    "1960":"1960",
+    "1970":"1960",
+    "1980":"1960",
+    "1990":"1994",
+    "2000":"2000",
+    "2010":"2010",
 
-  constructor(private http: HttpClient,private toast: ToastrService) { }
-
-  musicPlayerService = inject(MusicPlayerService)
-
-  loadMapData(windowWidth, windowHeight): void {
-    this.http.get('https://raw.githubusercontent.com/SelmaGuedidi/ErasTune/dev/src/assets/maps/world_1994.geojson')
+  }
+  decade:number=1980
+  constructor(private http: HttpClient, private toast: ToastrService) {
+    
+  }
+  
+  musicPlayerService = inject(MusicPlayerService);
+  
+  loadMapData(value,windowWidth, windowHeight): void {
+    // Use the latest value from decadeClicked$ in the URL
+    console.log(`world_${this.country_to_json[value]}.geojson`)
+    this.http
+      .get(`https://raw.githubusercontent.com/SelmaGuedidi/ErasTune/dev/src/assets/maps/world_${this.country_to_json[value]}.geojson`)
       .subscribe((json: any) => {
-        this.drawMap(json,windowWidth, windowHeight);
+        this.drawMap(json, windowWidth, windowHeight);
       });
+  }
+  removePrevMap():void{
+    const mapHolder = d3.select('#map-holder');
+    mapHolder.select('svg').remove();
   }
 
   private drawMap(json: any,windowWidth, windowHeight): void {
+    this.removePrevMap()
     const w = 1650;
     const h = 750;
 
@@ -55,10 +80,16 @@ export class MapService {
       .attr('width', w)
       .attr('height', h+100)
 
-     .call(d3.zoom().scaleExtent([1, 20]).translateExtent([[0, 0], [w+200, h+220]]).on('zoom', this.zoomed.bind(this)))
-      .append('g')
+      .call(d3.zoom().scaleExtent([1, 20])
+        .translateExtent([[-200, 0], [w, h + 220]])
+        .on('zoom', function (event) {
+            const { x, y, k } = event.transform;
+            this.countriesGroup.attr('transform', `translate(${x - 200}, ${y}) scale(${k})`);
+        }.bind(this)))
+    .append('g')
+    .attr('transform', 'translate(-200, 0)');
 
-      ;
+      
   let body=d3.select("body")
   .style("width", w)
   .style("height", h+200)
@@ -93,16 +124,22 @@ export class MapService {
         d3.select(`#${hoveredCountryId}`).attr('fill', '#f4bcbc');
       })
       .on('click', (d: any) => {
+<<<<<<< HEAD
         var countryName = d.srcElement.__data__.properties.NAME ? d.srcElement.__data__.properties.NAME : ''
         if (countryName == ''){
+=======
+        var countryABBREVN = d.srcElement.__data__.properties.ABBREVN ? d.srcElement.__data__.properties.ABBREVN : ''
+        if (countryABBREVN == ''){
+>>>>>>> 1b78fde7edd8a0ae92e5642be4774490a8bcabe9
 
           this.toast.error("coutnry not found")
 
         }
         else {
-          console.log("acessing music player service in", this.decadeClickedSource.value ,"for ",countryName);
+          console.log("acessing music player service in", this.decadeClickedSource.value ,"for ",countryABBREVN);``
+          var countryName = d.srcElement.__data__.properties.NAME ? d.srcElement.__data__.properties.NAME : ''
           // Define the observable without subscribing
-          this.countryClickedSource.next(countryName);
+          this.countryClickedSource.next([countryName,countryABBREVN]);
           // console.log(this.countryClicked$)
           // console.log(this.countryClickedSource)
         }

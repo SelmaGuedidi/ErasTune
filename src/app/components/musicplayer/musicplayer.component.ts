@@ -45,13 +45,14 @@ export class MusicplayerComponent {
   toast= inject(ToastrService)
   constructor(){
 
-    this.mapService.countryClicked$.subscribe((country) => {
+    this.mapService.countryClicked$.subscribe(([country,abrv]) => {
 
       console.log("in country observer")
       console.log("country changed : ", country)
       var decade = this.mapService.decadeClickedSource.value
-      this.musicPlayerService.getMusicByCountryAndYear(country,decade).pipe(
+      this.musicPlayerService.getMusicByCountryAndYear(abrv,decade).pipe(
         map(songs => {
+          console.log(songs);
           if (songs){
             this.toast.success(`${country} in ${decade}`)
             this.songSources = []
@@ -89,11 +90,11 @@ export class MusicplayerComponent {
 
       console.log("in decade observer")
       console.log("decade changed : ", decade)
-      var country = this.mapService.countryClickedSource.value
-      this.musicPlayerService.getMusicByCountryAndYear(country,decade).pipe(
+      const [countryName, countryAbrv]  = this.mapService.countryClickedSource.value
+      this.musicPlayerService.getMusicByCountryAndYear(countryAbrv,decade).pipe(
         map(songs => {
           if (songs){
-            this.toast.success(`${country} in ${decade}`)
+            this.toast.success(`${countryName} in ${decade}`)
             this.songSources = []
             this.songDetails = []
             this.songImages = []
@@ -105,7 +106,7 @@ export class MusicplayerComponent {
               )
             })
           }else {
-            this.toast.error(`${country} or ${decade} is empty for now`)
+            this.toast.error(`${countryName} or ${decade} is empty for now`)
             console.log(`${decade} or ${decade} is empty for now`)
             this.songSources = []
             this.songDetails = []

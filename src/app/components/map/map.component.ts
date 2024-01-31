@@ -19,7 +19,10 @@ export class MapComponent {
     this.zoom = 1;
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
-    this.mapService.loadMapData(windowWidth,windowHeight);
+    this.mapService.decadeClicked$.subscribe((value) => {
+      this.mapService.loadMapData(value,windowWidth,windowHeight);
+    });
+    
     console.log('Window Width:', windowWidth);
     console.log('Window Height:', windowHeight);
     }
