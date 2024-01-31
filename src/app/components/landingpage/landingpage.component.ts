@@ -6,7 +6,7 @@ import { ZoomService } from 'src/app/services/zoom.service';
 @Component({
   selector: 'app-landingpage',
   templateUrl: './landingpage.component.html',
-  styleUrl: './landingpage.component.scss'
+  styleUrls: ['./landingpage.component.scss']
 })
 export class LandingpageComponent{
 showMusicPlayer = false;
@@ -15,7 +15,7 @@ showMusicPlayer = false;
 constructor(public zoomService: ZoomService, public mapService: MapService){}
 ngOnInit(): void {
   this.mapService.countryClicked$.subscribe((country) => {
-    console.log(country);
+    // console.log(country);
     // Toggle the visibility of the music player based on the country click
     this.showMusicPlayer = country !== null;
   });

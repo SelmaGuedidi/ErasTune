@@ -2,14 +2,14 @@
 
 <div class="audio-container">
     <div class="img-container">
-      <img  [src]="songImages[currentSongIndex]" alt="music-cover" id="cover">
+      <img  [src]="songImages[currentSongIndex] | defaultImage" alt="music-cover" id="cover">
       
     </div>
-    <p class="album-title" id="album-title">{{ songDetails[currentSongIndex].album }}</p>
+    <p class="album-title" id="album-title">{{ songDetails[currentSongIndex]?.album | defaultName  }}</p>
   
   
-    <p class="song-title"  id="title">{{ songDetails[currentSongIndex].name }}</p>
-    <p class="artist-title" id="artist">{{ songDetails[currentSongIndex].artist }}</p>
+    <p class="song-title"  id="title">{{ songDetails[currentSongIndex]?.name | defaultName }}</p>
+    <p class="artist-title" id="artist">{{ songDetails[currentSongIndex]?.artist | defaultName }}</p>
 <div class="progress-info-container">
     <div class="time-info">
         {{ formatTime(audio.currentTime || 0) }} 
@@ -46,4 +46,5 @@
       </button>
     </div>
   </div>
+
   

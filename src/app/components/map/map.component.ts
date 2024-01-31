@@ -6,7 +6,7 @@ import { ZoomService } from 'src/app/services/zoom.service';
   selector: 'app-map',
   standalone: false,
   templateUrl: './map.component.html',
-  styleUrl: './map.component.scss'
+  styleUrls: ['./map.component.scss']
 })
 export class MapComponent {
   countriesGroup: d3.Selection<SVGGElement, unknown, HTMLElement, any> | undefined;
