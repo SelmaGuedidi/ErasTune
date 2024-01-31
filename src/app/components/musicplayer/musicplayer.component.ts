@@ -41,22 +41,24 @@ export class MusicplayerComponent {
   ];
 
   mapService = inject(MapService)
-   musicPlayerService = inject(MusicPlayerService)
+  musicPlayerService = inject(MusicPlayerService)
   toast= inject(ToastrService)
   constructor(){
 
     this.mapService.countryClicked$.subscribe((country) => {
     
-      console.log("in country observer")
+      if (country != null){
+        console.log("in country observer")
       console.log("country changed : ", country)
       var decade = this.mapService.decadeClickedSource.value
       this.musicPlayerService.getMusicByCountryAndYear(country,decade).pipe(
         map(songs => {
           if (songs){
-            this.toast.success(`${country} in ${decade}`)
+            this.toast.info(`${country} in ${decade}`)
             this.songSources = []
             this.songDetails = []
             this.songImages = []
+            // songs.shuffle()
             songs.forEach( (song) => {
               this.songSources.push(song["Song Link"])
               this.songImages.push(song["Image Link"])
@@ -70,7 +72,7 @@ export class MusicplayerComponent {
             this.songSources = []
             this.songDetails = []
             this.songImages = []
-            // this.mapService.countryClickedSource.next(null);
+            this.mapService.countryClickedSource.next(null);
           }
             
         }),
@@ -81,6 +83,8 @@ export class MusicplayerComponent {
         })
           
       ).subscribe(()=>{this.changeSong()})
+      
+      }
       
     })
 

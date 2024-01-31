@@ -96,11 +96,9 @@ export class MapService {
         d3.select(`#${hoveredCountryId}`).attr('fill', '#f4bcbc');
       })
       .on('click', (d: any) => {
-        var countryName = d.srcElement.__data__.properties.WB_CNTR ? d.srcElement.__data__.properties.WB_CNTR : ''
+        var countryName = d.srcElement.__data__.properties.NAME ? d.srcElement.__data__.properties.NAME : ''
         if (countryName == ''){
-
           this.toast.error("coutnry not found")       
-        
         }
         else {
           console.log("acessing music player service in", this.decadeClickedSource.value ,"for ",countryName);
@@ -115,9 +113,6 @@ export class MapService {
         this.hideTooltip();
 
       });
-
-
-
   }
   private zoomed(event: any): void {
     this.countriesGroup.attr('transform', event.transform);

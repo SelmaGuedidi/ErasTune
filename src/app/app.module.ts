@@ -10,7 +10,7 @@ import { ZoomService } from './services/zoom.service';
 import { MapComponent } from './components/map/map.component';
 import { LandingpageComponent } from './components/landingpage/landingpage.component';
 import { MusicplayerComponent } from './components/musicplayer/musicplayer.component';
-import { ToastrModule } from 'ngx-toastr';
+import {ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SplashScreenComponent} from './components/splash-screen/splash-screen.component'
 import { StepperComponent } from './components/stepper/stepper.component';

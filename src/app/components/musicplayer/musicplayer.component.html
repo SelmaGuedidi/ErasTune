@@ -5,11 +5,11 @@
       <img  [src]="songImages[currentSongIndex] | defaultImage" alt="music-cover" id="cover">
       
     </div>
-    <p class="album-title" id="album-title">{{ songDetails[currentSongIndex]?.album | defaultName  }}</p>
+    <p class="album-title" id="album-title"> album : {{ songDetails[currentSongIndex]?.album | defaultName  }}</p>
   
   
-    <p class="song-title"  id="title">{{ songDetails[currentSongIndex]?.name | defaultName }}</p>
-    <p class="artist-title" id="artist">{{ songDetails[currentSongIndex]?.artist | defaultName }}</p>
+    <p class="song-title"  id="title"> song title : {{ songDetails[currentSongIndex]?.name | defaultName }}</p>
+    <p class="artist-title" id="artist"> artist : {{ songDetails[currentSongIndex]?.artist | defaultName }}</p>
 <div class="progress-info-container">
     <div class="time-info">
         {{ formatTime(audio.currentTime || 0) }} 
