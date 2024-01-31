@@ -6,7 +6,7 @@ import { min } from 'rxjs';
 })
 export class ZoomService {
 
-  public _zoom = 1;
+  private _zoom = 1;
 
   get zoom(): number {
     return this._zoom;

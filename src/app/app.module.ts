@@ -1,4 +1,4 @@
-import { Input, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,13 +8,27 @@ import { HttpClientModule } from '@angular/common/http';
 import { ZoomComponent } from "./components/zoom/zoom.component";
 import { ZoomService } from './services/zoom.service';
 import { MapComponent } from './components/map/map.component';
+import { LandingpageComponent } from './components/landingpage/landingpage.component';
+import { MusicplayerComponent } from './components/musicplayer/musicplayer.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {SplashScreenComponent} from './components/splash-screen/splash-screen.component'
+import { StepperComponent } from './components/stepper/stepper.component';
+import { DefaultImagePipe } from './pipes/default-image.pipe';
+import { DefaultNamePipe } from './pipes/default-name.pipe';
 
 
 @NgModule({
     declarations: [
-      AppComponent,
+        AppComponent,
         ZoomComponent,
-        MapComponent
+        MapComponent,
+        MusicplayerComponent,
+        StepperComponent,
+        SplashScreenComponent,
+        LandingpageComponent,
+        DefaultImagePipe,
+        DefaultNamePipe,
     ],
     providers: [MapService,ZoomService],
     bootstrap: [
@@ -24,9 +38,10 @@ import { MapComponent } from './components/map/map.component';
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-       
+        ToastrModule.forRoot(),
+        BrowserAnimationsModule,
     ]
 })
 export class AppModule {
-  
+
 }

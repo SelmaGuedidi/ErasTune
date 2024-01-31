@@ -1,2 +1,7 @@
-<app-map [zoom]="zoomService.zoom"/>
-<app-zoom/>
+
+<app-splash-screen *ngIf="showSplashScreen$ | async"></app-splash-screen>
+
+<app-landingpage  *ngIf="!(showSplashScreen$ | async)"></app-landingpage>
+
+
+

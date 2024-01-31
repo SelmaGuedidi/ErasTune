@@ -1,0 +1,58 @@
+/* splash-screen.component.css */
+.splash-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fce4c4;
+}
+
+.splash-screen.zoom-out {
+  transform: scale(1.5);
+  transition: transform 1.3s ease-in-out; /* Add transition for zoom-out */
+}
+
+
+.content {
+  text-align: center;
+}
+
+.logo-container {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.logo-container img {
+  width: 500px; /* Adjust the width as needed */
+  height: auto;
+  margin-bottom: -30px;
+}
+
+.slogan {
+  font-family:'Quicksand', sans-serif; /* Replace 'Your Selected Font' with the chosen font */
+  font-size: 24px;
+  color: black; /* Font color in black */
+ /* Add some margin for spacing */
+  margin-bottom: 160px;
+
+}
+
+/* Font Awesome hourglass icon with flip animation */
+.hourglass-container {
+  position: absolute;
+  bottom: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 50%;
+  margin-bottom: 40px;
+}
+
+.fa-hourglass {
+  color: #fff;
+  animation: flip 2s linear infinite;
+}
+
+@keyframes flip {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(180deg); }
+}
