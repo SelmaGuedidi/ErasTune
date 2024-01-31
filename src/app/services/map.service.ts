@@ -77,9 +77,14 @@ countryClicked$ = this.countryClickedSource.asObservable();
       .attr('width', w)
       .attr('height', h+100)
 
-     .call(d3.zoom().scaleExtent([1, 20]).translateExtent([[0, 0], [w+200, h+220]]).on('zoom', this.zoomed.bind(this)))
-     .append('g')
-     .attr('transform', 'translate(-200, 0)');
+      .call(d3.zoom().scaleExtent([1, 20])
+        .translateExtent([[-200, 0], [w, h + 220]])
+        .on('zoom', function (event) {
+            const { x, y, k } = event.transform;
+            this.countriesGroup.attr('transform', `translate(${x - 200}, ${y}) scale(${k})`);
+        }.bind(this)))
+    .append('g')
+    .attr('transform', 'translate(-200, 0)');
 
       
   let body=d3.select("body")
