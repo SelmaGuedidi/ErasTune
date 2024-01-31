@@ -1,7 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable,inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as d3 from 'd3';
 import { BehaviorSubject } from 'rxjs';
+import { MusicPlayerService } from './music-player.service';
+import { Observable, catchError, map, of } from 'rxjs';
+import { Song } from '../Models/song';
+import { ToastrService } from 'ngx-toastr';
+
+
 
 
 
@@ -11,14 +17,20 @@ import { BehaviorSubject } from 'rxjs';
 
 export class MapService {
   private countriesGroup: any;
-  private countryClickedSource = new BehaviorSubject<string | null>(null);
+
+  countryClickedSource = new BehaviorSubject<String | null>(null);
   countryClicked$ = this.countryClickedSource.asObservable();
+  
+  decadeClickedSource = new BehaviorSubject<number>(1980);
+  decadeClicked$ = this.decadeClickedSource.asObservable();
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private toast: ToastrService) { }
+
+  musicPlayerService = inject(MusicPlayerService)
 
   loadMapData(windowWidth, windowHeight): void {
-    this.http.get('https://raw.githubusercontent.com/SelmaGuedidi/ErasTune/dev/src/assets/maps/world_2010.geojson')
+    this.http.get('https://raw.githubusercontent.com/SelmaGuedidi/ErasTune/dev/src/assets/maps/world_1994.geojson')
       .subscribe((json: any) => {
         this.drawMap(json,windowWidth, windowHeight);
       });
@@ -62,7 +74,7 @@ export class MapService {
 
       return '#7cc0d8';
     });
-    console.log(json.features)
+    // console.log(json.features)
     const countries = this.countriesGroup.selectAll('path')
       .data(json.features)
       .enter()
@@ -75,7 +87,7 @@ export class MapService {
       .style('stroke', '#2A2C39') // Set the stroke color
   .style('stroke-width', '0.5')
       .attr('d', (d: any) => path(d) as string)
-      .attr('id', (d: any) => { console.log(d.properties.NAME);return 'country' + d.properties.NAME?d.properties.NAME:""})
+      .attr('id', (d: any) => { /*console.log(d.properties.NAME);return 'country' + d.properties.NAME?d.properties.NAME:""*/})
       .attr('class', 'country')
       .on('mouseover', (event, d: any) => {
         const countryName = d.properties.NAME ? d.properties.NAME : '';
@@ -84,8 +96,20 @@ export class MapService {
         d3.select(`#${hoveredCountryId}`).attr('fill', '#f4bcbc');
       })
       .on('click', (d: any) => {
-        console.log(d.srcElement.__data__.properties.NAME);
-        this.countryClickedSource.next(d.srcElement.__data__.properties.NAME);
+        var countryName = d.srcElement.__data__.properties.WB_CNTR ? d.srcElement.__data__.properties.WB_CNTR : ''
+        if (countryName == ''){
+
+          this.toast.error("coutnry not found")       
+        
+        }
+        else {
+          console.log("acessing music player service in", this.decadeClickedSource.value ,"for ",countryName);
+          // Define the observable without subscribing
+          this.countryClickedSource.next(countryName);
+          // console.log(this.countryClicked$)
+          // console.log(this.countryClickedSource)
+        }
+
       })
       .on('mouseout', () => {
         this.hideTooltip();
@@ -110,5 +134,12 @@ export class MapService {
   private hideTooltip(): void {
     const tooltip = d3.select('#tooltip');
     tooltip.style('display', 'none');
+  }
+  decadeClicked (decade : number){
+    this.decadeClickedSource.next(decade)
+    // console.log(this.decadeClicked$)
+    // console.log(this.decadeClickedSource)
+    // this.musicPlayerService.getMusicByCountryAndYear(,decade)
+
   }
 }
