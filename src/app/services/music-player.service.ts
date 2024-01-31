@@ -18,9 +18,9 @@ export class MusicPlayerService {
   API_KEY='AIzaSyADMRev8D_lIqhGLm9HAq0xhVnF5BlBgU0'
   
 
-  getMusicByCountryAndYear(countryCode: String, year: number): Observable<Song[]> {
-    this.complete_url = this.API_URL+`${countryCode}/${year}.json`;
-    // console.log("accessing DATA  on url "+this.complete_url)
+  getMusicByCountryAndYear(countryAbrv:String, year: number): Observable<Song[]> {
+    this.complete_url = this.API_URL+`${countryAbrv}/${year}.json`;
+     console.log("accessing DATA  on url "+this.complete_url)
     const headers = new HttpHeaders({
       'key' : this.API_KEY
     })
