@@ -17,8 +17,8 @@ import { ToastrService } from 'ngx-toastr';
 export class MapService {
   private countriesGroup: any;
 
-  countryClickedSource = new BehaviorSubject<String | null>(null);
-  countryClicked$ = this.countryClickedSource.asObservable();
+  countryClickedSource = new BehaviorSubject<string[] | null>(null);
+countryClicked$ = this.countryClickedSource.asObservable(); 
   
   decadeClickedSource = new BehaviorSubject<number>(1980);
   decadeClicked$ = this.decadeClickedSource.asObservable();
@@ -125,7 +125,7 @@ export class MapService {
           console.log("acessing music player service in", this.decadeClickedSource.value ,"for ",countryABBREVN);``
           var countryName = d.srcElement.__data__.properties.NAME ? d.srcElement.__data__.properties.NAME : ''
           // Define the observable without subscribing
-          this.countryClickedSource.next(countryName);
+          this.countryClickedSource.next([countryName,countryABBREVN]);
           // console.log(this.countryClicked$)
           // console.log(this.countryClickedSource)
         }
