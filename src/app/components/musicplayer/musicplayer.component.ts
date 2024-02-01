@@ -1,10 +1,11 @@
 import { MapService } from 'src/app/services/map.service';
 import { Component, inject } from '@angular/core';
 import { Observable, catchError, map, of, tap } from 'rxjs';
-import { Song } from 'src/app/Models/song';
 import { MusicPlayerService } from 'src/app/services/music-player.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PopupComponent } from '../popup/popup.component';
+import { Song } from 'src/app/Models/song';
 
 export interface AudioModel {
   volume: number;
@@ -24,110 +25,109 @@ export class MusicplayerComponent {
   isDragging = false;
   progress: number = 0;
 
-  
-
-  songSources: string[] = [
-    // 'https://d24jd2l6qnq89g.cloudfront.net/USA/1950/856bfb54-9313-4c04-9376-12168f4e4fc2.mp3?Expires=1706130377359628&Key-Pair-Id=APKAJP5ZLPWNV42F3CCQ&Signature=R-qixwCWewAzidZf1~vm4BbysqBZRGjlaRxpo6Bm-LyXua7qdQ1N8F2gYqSOrCd8TXG5TMqYCx3FIw9kD~aMe8h61oC4zr6RM1kyvD-CV~PHGu4n90xXSx~6sPlzsqPK3n2zqd8XFsAWzoqWbDJMl6u1G06Ionc9dj8JfDTQgGKNz-M0~UMavHJMo0RniIS1LiELcVbyt1nmjExsKiCWzJbP1U6fLQoa~2Up5sDgz0Zeq4SF4LIvmVnRWr0tCo1LcMQTfLrACeGfndsrPr7K5snHrlH8OkPlOlWbFt4PkfiAdxpkTCjICX7zvn-Gzn08IrxPssA7pP0INAr4eRjNyw__',
-    // 'https://d24jd2l6qnq89g.cloudfront.net/USA/1950/54b227ef-2428-4a8d-a7b6-53d34f05f952.mp3?Expires=1706130973627689&Key-Pair-Id=APKAJP5ZLPWNV42F3CCQ&Signature=YE54VKIqeYzHLOwcS4lTPrclpdo1J9TT55Pd0tPBdqUORtKwg19s2ewKJFBbAlUOTM78taxR6~m9e~D2UCXR3JkwpP8sLlXpkH67Q6m1aQTb64GVCVdG6-WofkNvTk2QRNJZWvV4bPbJeKf5rA5~Q6VAvJ290sruYOFoevvdEecaXTE9kn2P~1y3gHQSe6NlcONitJVYFum0oujCPrh35mSIewWj~NUV9gFaGzeLioF8P5WLFJmT0lMcDk6WPmOIZtBck1uPncOFAimYr7DTCGog-88cmZiYDgP76kmkj-wtYXsHr1DXVfdUYl07YeKnXruduSAcgv6yevM0-6t2hw__',
-  ];
-
-  songImages: string[] = [
-    // 'https://asset.radiooooo.com/cover/USA/1950/medium/856bfb54-9313-4c04-9376-12168f4e4fc2.jpeg',
-    // 'https://asset.radiooooo.com/cover/USA/1950/medium/54b227ef-2428-4a8d-a7b6-53d34f05f952.jpg',
-  ];
-  songDetails: { name: string, artist: string, album: string }[] = [
-    // { name: 'Mambo Italiano', artist: 'Dean Martin & The Rat Pack', album: 'Rakish & Rampant' },
-    // { name: 'Song 2', artist: 'Artist 2', album: 'Album 2' },
-  ];
+  songs: Song[] = [];
+  songSources: string[] = [];
 
   mapService = inject(MapService)
-   musicPlayerService = inject(MusicPlayerService)
+  musicPlayerService = inject(MusicPlayerService)
   toast= inject(ToastrService)
+  private modalService = inject (NgbModal)
+  
+  openPopup(type : string) {
+  
+    const modalRef = this.modalService.open(PopupComponent);
+    if (type == "artist"){
+      modalRef.componentInstance.artist = this.songs[this.currentSongIndex].details.artist;
+    }
+    else if (type == "album"){
+      modalRef.componentInstance.album_title = this.songs[this.currentSongIndex].details.album;
+    }
+  }
   constructor(){
 
     this.mapService.countryClicked$.subscribe(([country,abrv]) => {
-    
+
       console.log("in country observer")
       console.log("country changed : ", country)
       var decade = this.mapService.decadeClickedSource.value
-      this.musicPlayerService.getMusicByCountryAndYear(abrv,decade).pipe(
-        map(songs => {
-          console.log(songs);
-          if (songs){
-            this.toast.success(`${country} in ${decade}`)
-            this.songSources = []
-            this.songDetails = []
-            this.songImages = []
-            songs.forEach( (song) => {
-              this.songSources.push(song["Song Link"])
-              this.songImages.push(song["Image Link"])
-              this.songDetails.push(
-                {name : song["Song Name"],artist: song["Artist Name"],album: song["Album Name"]}
-              )
+      this.mapService.countryClicked$.subscribe(([country, abrv]) => {
+        console.log('in country observer');
+        console.log('country changed : ', country);
+        var decade = this.mapService.decadeClickedSource.value;
+        this.musicPlayerService
+          .getMusicByCountryAndYear(abrv, decade)
+          .pipe(
+            map((songs) => {
+              console.log("songs",songs);
+              if (songs) {
+                this.toast.success(`${country} in ${decade}`);
+                this.songs = songs.map((song) => ({
+                  source: song['Song Link'],
+                  image: song['Image Link'],
+                  details: {
+                    name: song['Song Name'],
+                    artist: song['Artist Name'],
+                    album: song['Album Name'],
+                  },
+                }));
+                this.songSources = this.songs.map((song) => song.source);
+              } else {
+                this.toast.error(`${country} or ${decade} is empty for now`);
+                console.log(`${country} or ${decade} is empty for now`);
+                this.songs = [];
+              }
+            }),
+            catchError((error) => {
+              console.error('Error fetching data:', error);
+              this.toast.error('error fetching data');
+              return of([]); // Return an empty array or handle the error as needed
             })
-          }else {
-            this.toast.error(`${country} or ${decade} is empty for now`)
-            console.log(`${country} or ${decade} is empty for now`)
-            this.songSources = []
-            this.songDetails = []
-            this.songImages = []
-            // this.mapService.countryClickedSource.next(null);
-          }
-            
-        }),
-        catchError(error => {
-        console.error("Error fetching data:", error);
-        this.toast.error("error fetching data")
-        return of([]);  // Return an empty array or handle the error as needed
-        })
-          
-      ).subscribe(()=>{this.changeSong()})
-      
+          )
+          .subscribe(() => {
+            this.changeSong();
+          });
+      });
     })
 
-    
+
     this.mapService.decadeClicked$.subscribe((decade) => {
-    
+
       console.log("in decade observer")
       console.log("decade changed : ", decade)
       const [countryName, countryAbrv]  = this.mapService.countryClickedSource.value
       this.musicPlayerService.getMusicByCountryAndYear(countryAbrv,decade).pipe(
         map(songs => {
-          if (songs){
-            this.toast.success(`${countryName} in ${decade}`)
-            this.songSources = []
-            this.songDetails = []
-            this.songImages = []
-            songs.forEach( (song) => {
-              this.songSources.push(song["Song Link"])
-              this.songImages.push(song["Image Link"])
-              this.songDetails.push(
-                {name : song["Song Name"],artist: song["Artist Name"],album: song["Album Name"]}
-              )
-            })
-          }else {
-            this.toast.error(`${countryName} or ${decade} is empty for now`)
-            console.log(`${decade} or ${decade} is empty for now`)
-            this.songSources = []
-            this.songDetails = []
-            this.songImages = []
-            // this.mapService.decadeClickedSource.next(null);
+          if (songs) {
+            this.toast.success(`${countryName} in ${decade}`);
+            this.songs = songs.map((song) => ({
+              source: song['Song Link'],
+              image: song['Image Link'],
+              details: {
+                name: song['Song Name'],
+                artist: song['Artist Name'],
+                album: song['Album Name'],
+              },
+            }));
+
+          this.songSources = this.songs.map((song) => song.source)
+        }
+          else {
+            this.toast.error(`${countryName} or ${decade} is empty for now`);
+            console.log(`${countryName} or ${decade} is empty for now`);
+            this.songs = [];
           }
-            
         }),
         catchError(error => {
         console.error("Error fetching data:", error);
         this.toast.error("error fetching data")
         return of([]);  // Return an empty array or handle the error as needed
         })
-          
+
       ).subscribe(()=>{this.changeSong()})
-      
     })
 
 
-    }  
-  
+    }
 
   ngOnInit(): void {
     this.audio = new Audio();
@@ -205,6 +205,7 @@ export class MusicplayerComponent {
     return `${formattedMinutes}:${formattedSeconds}`;
   }
 
+  
 
 
 }
