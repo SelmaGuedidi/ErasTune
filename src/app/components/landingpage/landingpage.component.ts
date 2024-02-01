@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { DidyouknowService } from 'src/app/services/didyouknow.service';
+
+import { DidyouknowFactService } from 'src/app/services/did-you-know-fact.service';
+
 import { MapService } from 'src/app/services/map.service';
 import { SpotifyapiService } from 'src/app/services/spotifyapi.service';
 import { ZoomService } from 'src/app/services/zoom.service';
@@ -11,9 +13,15 @@ import { ZoomService } from 'src/app/services/zoom.service';
 })
 export class LandingpageComponent{
 showMusicPlayer = false;
+  
 
 
-constructor(public zoomService: ZoomService, public mapService: MapService,private didYouKnowService: DidyouknowService){}
+
+constructor(public zoomService: ZoomService, public mapService: MapService, public didYouKnowFactService:DidyouknowFactService){
+  
+}
+
+
 ngOnInit(): void {
 
   this.mapService.countryClicked$.subscribe((country) => {

@@ -40,7 +40,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        ToastrModule.forRoot(),
+        ToastrModule.forRoot({preventDuplicates: true}),
         BrowserAnimationsModule,
         NgbModule
     ]
