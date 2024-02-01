@@ -30,3 +30,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: dist/ErasTune
         enable_jekyll: true
+      env:
+        API_KEY: ${{ secrets.API_KEY }}
+        SPOTIFY_API_KEY: ${{ secrets.SPOTIFY_API_KEY }}
+        SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
