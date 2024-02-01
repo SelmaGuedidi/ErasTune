@@ -13,16 +13,9 @@ import { ToastrService } from 'ngx-toastr';
 
 export class MapService {
   private countriesGroup: any;
-
-<<<<<<< HEAD
-  countryClickedSource = new BehaviorSubject<String | null>(null);
+  countryClickedSource = new BehaviorSubject<string[] | null>(null);
   countryClicked$ = this.countryClickedSource.asObservable();
 
-=======
-  countryClickedSource = new BehaviorSubject<string[] | null>(null);
-countryClicked$ = this.countryClickedSource.asObservable(); 
-  
->>>>>>> 1b78fde7edd8a0ae92e5642be4774490a8bcabe9
   decadeClickedSource = new BehaviorSubject<number>(1980);
   decadeClicked$ = this.decadeClickedSource.asObservable();
 
@@ -38,11 +31,11 @@ countryClicked$ = this.countryClickedSource.asObservable();
   }
   decade:number=1980
   constructor(private http: HttpClient, private toast: ToastrService) {
-    
+
   }
-  
+
   musicPlayerService = inject(MusicPlayerService);
-  
+
   loadMapData(value,windowWidth, windowHeight): void {
     // Use the latest value from decadeClicked$ in the URL
     console.log(`world_${this.country_to_json[value]}.geojson`)
@@ -89,7 +82,7 @@ countryClicked$ = this.countryClickedSource.asObservable();
     .append('g')
     .attr('transform', 'translate(-200, 0)');
 
-      
+
   let body=d3.select("body")
   .style("width", w)
   .style("height", h+200)
@@ -124,13 +117,8 @@ countryClicked$ = this.countryClickedSource.asObservable();
         d3.select(`#${hoveredCountryId}`).attr('fill', '#f4bcbc');
       })
       .on('click', (d: any) => {
-<<<<<<< HEAD
-        var countryName = d.srcElement.__data__.properties.NAME ? d.srcElement.__data__.properties.NAME : ''
-        if (countryName == ''){
-=======
         var countryABBREVN = d.srcElement.__data__.properties.ABBREVN ? d.srcElement.__data__.properties.ABBREVN : ''
         if (countryABBREVN == ''){
->>>>>>> 1b78fde7edd8a0ae92e5642be4774490a8bcabe9
 
           this.toast.error("coutnry not found")
 
