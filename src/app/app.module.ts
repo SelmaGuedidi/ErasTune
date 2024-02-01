@@ -10,12 +10,14 @@ import { ZoomService } from './services/zoom.service';
 import { MapComponent } from './components/map/map.component';
 import { LandingpageComponent } from './components/landingpage/landingpage.component';
 import { MusicplayerComponent } from './components/musicplayer/musicplayer.component';
-import { ToastrModule } from 'ngx-toastr';
+import {ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SplashScreenComponent} from './components/splash-screen/splash-screen.component'
 import { StepperComponent } from './components/stepper/stepper.component';
 import { DefaultImagePipe } from './pipes/default-image.pipe';
 import { DefaultNamePipe } from './pipes/default-name.pipe';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -30,7 +32,7 @@ import { DefaultNamePipe } from './pipes/default-name.pipe';
         DefaultImagePipe,
         DefaultNamePipe,
     ],
-    providers: [MapService,ZoomService],
+    providers: [MapService,ZoomService, provideAnimationsAsync()],
     bootstrap: [
         AppComponent,
     ],
@@ -40,6 +42,7 @@ import { DefaultNamePipe } from './pipes/default-name.pipe';
         HttpClientModule,
         ToastrModule.forRoot({preventDuplicates: true}),
         BrowserAnimationsModule,
+        NgbModule
     ]
 })
 export class AppModule {

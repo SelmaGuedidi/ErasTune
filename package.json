@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@angular/animations": "^17.1.1",
+    "@angular/cdk": "^17.1.2",
     "@angular/common": "^17.1.1",
     "@angular/compiler": "^17.1.1",
     "@angular/core": "^17.1.1",
@@ -26,10 +27,16 @@
     "@angular/router": "^17.1.1",
     "@material/slider": "^14.0.0",
 
+    "@ng-bootstrap/ng-bootstrap": "^16.0.0",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.2",
+   
+
     "axios": "^1.6.7",
     "d3": "^7.8.5",
     "font-awesome": "^4.7.0",
     "ngx-toastr": "^18.0.0",
+
 
     "d3": "^7.8.5",
     "font-awesome": "^4.7.0",
@@ -38,6 +45,7 @@
     "primeng": "^17.4.0",
 
     "rxjs": "~7.8.0",
+    "sass-loader": "^14.1.0",
     "slider": "^1.0.4",
     "tslib": "^2.5.0",
     "zone.js": "~0.14.3"
@@ -46,6 +54,7 @@
     "@angular-devkit/build-angular": "^17.1.1",
     "@angular/cli": "~17.1.1",
     "@angular/compiler-cli": "^17.1.1",
+    "@angular/localize": "^17.1.1",
     "@types/d3": "^7.4.3",
     "@types/d3-axis": "^3.0.6",
     "@types/d3-format": "^3.0.4",

@@ -1,10 +1,11 @@
 import { MapService } from 'src/app/services/map.service';
 import { Component, inject } from '@angular/core';
 import { Observable, catchError, map, of, tap } from 'rxjs';
-import { Song } from 'src/app/Models/song';
 import { MusicPlayerService } from 'src/app/services/music-player.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PopupComponent } from '../popup/popup.component';
+import { Song } from 'src/app/Models/song';
 
 export interface AudioModel {
   volume: number;
@@ -28,8 +29,20 @@ export class MusicplayerComponent {
   songSources: string[] = [];
 
   mapService = inject(MapService)
-   musicPlayerService = inject(MusicPlayerService)
+  musicPlayerService = inject(MusicPlayerService)
   toast= inject(ToastrService)
+  private modalService = inject (NgbModal)
+  
+  openPopup(type : string) {
+  
+    const modalRef = this.modalService.open(PopupComponent);
+    if (type == "artist"){
+      modalRef.componentInstance.artist = this.songs[this.currentSongIndex].details.artist;
+    }
+    else if (type == "album"){
+      modalRef.componentInstance.album_title = this.songs[this.currentSongIndex].details.album;
+    }
+  }
   constructor(){
 
     this.mapService.countryClicked$.subscribe(([country,abrv]) => {
@@ -45,7 +58,7 @@ export class MusicplayerComponent {
           .getMusicByCountryAndYear(abrv, decade)
           .pipe(
             map((songs) => {
-              console.log(songs);
+              console.log("songs",songs);
               if (songs) {
                 this.toast.success(`${country} in ${decade}`);
                 this.songs = songs.map((song) => ({
@@ -57,7 +70,6 @@ export class MusicplayerComponent {
                     album: song['Album Name'],
                   },
                 }));
-
                 this.songSources = this.songs.map((song) => song.source);
               } else {
                 this.toast.error(`${country} or ${decade} is empty for now`);
@@ -193,6 +205,7 @@ export class MusicplayerComponent {
     return `${formattedMinutes}:${formattedSeconds}`;
   }
 
+  
 
 
 }

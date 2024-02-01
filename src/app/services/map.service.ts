@@ -155,9 +155,6 @@ export class MapService {
         this.hideTooltip();
 
       });
-
-
-
   }
   private zoomed(event: any): void {
     this.countriesGroup.attr('transform', event.transform);
