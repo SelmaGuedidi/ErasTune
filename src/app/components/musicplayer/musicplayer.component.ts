@@ -3,9 +3,9 @@ import { Component, inject } from '@angular/core';
 import { Observable, catchError, map, of, tap } from 'rxjs';
 import { MusicPlayerService } from 'src/app/services/music-player.service';
 import { ToastrService } from 'ngx-toastr';
-import { Song } from 'src/app/models/song';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PopupComponent } from '../popup/popup.component';
+import { Song } from 'src/app/Models/song';
 
 export interface AudioModel {
   volume: number;
@@ -33,12 +33,15 @@ export class MusicplayerComponent {
   toast= inject(ToastrService)
   private modalService = inject (NgbModal)
   
-  openPopup() {
+  openPopup(type : string) {
   
     const modalRef = this.modalService.open(PopupComponent);
-    modalRef.componentInstance.title = 'title from parent';
-    modalRef.componentInstance.body = 'body from parent';
-
+    if (type == "artist"){
+      modalRef.componentInstance.artist = this.songs[this.currentSongIndex].details.artist;
+    }
+    else if (type == "album"){
+      modalRef.componentInstance.album_title = this.songs[this.currentSongIndex].details.album;
+    }
   }
   constructor(){
 
@@ -55,7 +58,7 @@ export class MusicplayerComponent {
           .getMusicByCountryAndYear(abrv, decade)
           .pipe(
             map((songs) => {
-              console.log(songs);
+              console.log("songs",songs);
               if (songs) {
                 this.toast.success(`${country} in ${decade}`);
                 this.songs = songs.map((song) => ({
@@ -67,7 +70,6 @@ export class MusicplayerComponent {
                     album: song['Album Name'],
                   },
                 }));
-
                 this.songSources = this.songs.map((song) => song.source);
               } else {
                 this.toast.error(`${country} or ${decade} is empty for now`);

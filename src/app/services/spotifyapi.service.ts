@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map } from 'rxjs';
+
 import { SPOTIFY_API_KEY, SPOTIFY_CLIENT_ID } from 'src/constants';
 
 @Injectable({

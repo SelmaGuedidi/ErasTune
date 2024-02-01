@@ -3,13 +3,15 @@
 <div class="audio-container">
     <div class="img-container">
       <img  [src]="songs[currentSongIndex]?.image | defaultImage" alt="music-cover" id="cover">
-      
+      <div class="popup-button" >
+        <i class="fa fa-info-circle"></i>
+      </div>
     </div>
-    <p class="album-title" id="album-title">{{ songs[currentSongIndex]?.details.album | defaultName  }}</p>
+    <p (click)="openPopup('album')" class="album-title" id="album-title">{{ songs[currentSongIndex]?.details.album | defaultName  }}</p>
 
 
     <p class="song-title"  id="title">{{ songs[currentSongIndex]?.details.name | defaultName }}</p>
-    <p class="artist-title" id="artist">{{ songs[currentSongIndex]?.details.artist | defaultName }}</p>
+    <p class="artist-title"(click)="openPopup('artist')" id="artist">{{ songs[currentSongIndex]?.details.artist | defaultName }}</p>
 <div class="progress-info-container">
     <div class="time-info">
         {{ formatTime(audio.currentTime || 0) }}
@@ -29,13 +31,8 @@
         <i class="fa fa-volume-up" aria-hidden="true"></i>
         <input type="range" background-color="red" class="volume-slider"  [value]="audio.volume * 100"  (input)="updateVolume($event)">
     </div>
-<<<<<<< HEAD
-    
-   
-=======
 
 
->>>>>>> d8cfec1a026eaf256c4616d72abc3b1c1af1d089
 </div>
     <audio [src]="audio.src" id="audio"></audio>
 

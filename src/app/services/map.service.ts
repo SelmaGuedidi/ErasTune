@@ -119,13 +119,9 @@ export class MapService {
       .on('click', (d: any) => {
         var countryABBREVN = d.srcElement.__data__.properties.ABBREVN ? d.srcElement.__data__.properties.ABBREVN : ''
         if (countryABBREVN == ''){
-<<<<<<< HEAD
-          this.toast.error("coutnry not found")       
-=======
 
           this.toast.error("coutnry not found")
 
->>>>>>> d8cfec1a026eaf256c4616d72abc3b1c1af1d089
         }
         else {
           console.log("acessing music player service in", this.decadeClickedSource.value ,"for ",countryABBREVN);``

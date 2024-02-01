@@ -23,6 +23,14 @@
     font-weight: 900;
     text-shadow: 0.5px 0.5px #7cc0d8;
 }
+/* Add this style to change text color on hover */
+.artist-title:hover {
+  color: #7cc0d8;
+}
+.album-title:hover {
+  color: #7cc0d8;
+}
+
 .audio-container{
   color:#fff;
   background-color: rgba(251, 212, 195, 0.9)  ;
