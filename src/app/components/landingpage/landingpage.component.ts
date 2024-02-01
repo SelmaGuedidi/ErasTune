@@ -30,12 +30,7 @@ ngOnInit(): void {
     this.showMusicPlayer = country !== null;
   });
 }
-getDidYouKnow(): void {
-  this.didYouKnowService.getDidYouKnow("Tunisia",2000).subscribe(response => {
-    console.log(response);
-  });
-  // console.log(this.didYouKnowService.chat("Tunisia",2000));
-}
+
 
 
 }

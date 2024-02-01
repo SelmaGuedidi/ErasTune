@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
-import { SPOTIFY_API_KEY, SPOTIFY_CLIENT_ID } from 'src/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,8 @@ export class SpotifyapiService {
 
   constructor(private http: HttpClient) {}
   getAccessToken(): Observable<string> {
+    const SPOTIFY_CLIENT_ID=environment.SPOTIFY_CLIENT_ID;
+    const SPOTIFY_API_KEY=environment.SPOTIFY_API_KEY;
     const authHeader = btoa(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_API_KEY}`);
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',

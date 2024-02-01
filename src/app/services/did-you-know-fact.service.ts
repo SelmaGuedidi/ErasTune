@@ -56,7 +56,7 @@ export class DidyouknowFactService {
     
     try {
       const response = await axios.request(options);
-      //console.log(response.data["openai"]["answers"][0]);
+      // console.log(response.data["openai"]["answers"][0]);
       return response.data["openai"]["answers"][0];
     } catch (error) {
       console.error(error);
