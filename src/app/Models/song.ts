@@ -1,5 +1,9 @@
 export interface Song {
-    title: string;
-    audioSrc: string;
-    coverSrc: string;
-  }
+  source: string;
+  image: string;
+  details: {
+    name: string;
+    artist: string;
+    album: string;
+  };
+}
