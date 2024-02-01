@@ -3,9 +3,7 @@
 <div class="audio-container">
     <div class="img-container">
       <img  [src]="songs[currentSongIndex]?.image | defaultImage" alt="music-cover" id="cover">
-      <div class="popup-button" >
-        <i class="fa fa-info-circle"></i>
-      </div>
+      
     </div>
     <p (click)="openPopup('album')" class="album-title" id="album-title">{{ songs[currentSongIndex]?.details.album | defaultName  }}</p>
 
