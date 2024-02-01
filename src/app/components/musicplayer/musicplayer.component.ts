@@ -59,11 +59,6 @@ export class MusicplayerComponent {
                 }));
 
                 this.songSources = this.songs.map((song) => song.source);
-
-                console.log(this.songs[this.currentSongIndex].details.album);
-                console.log(this.songs[this.currentSongIndex].details.artist);
-                this.musicPlayerService.searchArtist(this.songs[this.currentSongIndex].details.artist);
-                this.musicPlayerService.searchAlbum(this.songs[this.currentSongIndex].details.album);
               } else {
                 this.toast.error(`${country} or ${decade} is empty for now`);
                 console.log(`${country} or ${decade} is empty for now`);

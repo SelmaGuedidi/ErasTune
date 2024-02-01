@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CHATGPT_KEY } from 'src/constants';
 
-
-// import ChatGPT from "chatgpt-api";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,10 @@ import { Observable } from 'rxjs';
 export class DidyouknowService {
   constructor(private http: HttpClient) {}
 
-  private apiKey = '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'; // Replace with your GPT-3 API key
+  promptText = '';
+  showSpinner = false;
+
+  private apiKey = CHATGPT_KEY; // Replace with your GPT-3 API key
   private apiUrl = 'https://api.openai.com/v1/chat/completions';
   // private chatgpt = new ChatGPT(this.apiKey);
 
@@ -35,11 +37,7 @@ export class DidyouknowService {
     };
 
     const data = {
-
       prompt,
-      // "input":prompt,
-      // "model": "text-embedding-ada-002",
-      // "encoding_format": "float",
       max_tokens: 150,
     };
 
