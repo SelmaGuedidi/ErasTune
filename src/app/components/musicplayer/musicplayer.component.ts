@@ -1,10 +1,11 @@
 import { MapService } from 'src/app/services/map.service';
 import { Component, inject } from '@angular/core';
 import { Observable, catchError, map, of, tap } from 'rxjs';
-import { Song } from 'src/app/Models/song';
 import { MusicPlayerService } from 'src/app/services/music-player.service';
 import { ToastrService } from 'ngx-toastr';
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PopupComponent } from '../popup/popup.component';
 
 export interface AudioModel {
   volume: number;
@@ -43,6 +44,15 @@ export class MusicplayerComponent {
   mapService = inject(MapService)
   musicPlayerService = inject(MusicPlayerService)
   toast= inject(ToastrService)
+  private modalService = inject (NgbModal)
+  
+  openPopup() {
+  
+    const modalRef = this.modalService.open(PopupComponent);
+    modalRef.componentInstance.title = 'title from parent';
+    modalRef.componentInstance.body = 'body from parent';
+
+  }
   constructor(){
 
     this.mapService.countryClicked$.subscribe(([country,abrv]) => {
@@ -209,6 +219,7 @@ export class MusicplayerComponent {
     return `${formattedMinutes}:${formattedSeconds}`;
   }
 
+  
 
 
 }

@@ -16,6 +16,8 @@ import {SplashScreenComponent} from './components/splash-screen/splash-screen.co
 import { StepperComponent } from './components/stepper/stepper.component';
 import { DefaultImagePipe } from './pipes/default-image.pipe';
 import { DefaultNamePipe } from './pipes/default-name.pipe';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -30,7 +32,7 @@ import { DefaultNamePipe } from './pipes/default-name.pipe';
         DefaultImagePipe,
         DefaultNamePipe,
     ],
-    providers: [MapService,ZoomService],
+    providers: [MapService,ZoomService, provideAnimationsAsync()],
     bootstrap: [
         AppComponent,
     ],
@@ -40,6 +42,7 @@ import { DefaultNamePipe } from './pipes/default-name.pipe';
         HttpClientModule,
         ToastrModule.forRoot(),
         BrowserAnimationsModule,
+        NgbModule
     ]
 })
 export class AppModule {

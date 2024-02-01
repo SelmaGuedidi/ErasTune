@@ -2,26 +2,31 @@
 
 <div class="audio-container">
     <div class="img-container">
-      <img  [src]="songImages[currentSongIndex] | defaultImage" alt="music-cover" id="cover">
       
+      <img  [src]="songImages[currentSongIndex] | defaultImage" alt="music-cover" id="cover">
+
+      <div class="popup-button" (click)="openPopup()">
+        <i class="fa fa-info-circle"></i>
+      </div>
     </div>
-    <p class="album-title" id="album-title"> album : {{ songDetails[currentSongIndex]?.album | defaultName  }}</p>
-  
-  
-    <p class="song-title"  id="title"> song title : {{ songDetails[currentSongIndex]?.name | defaultName }}</p>
-    <p class="artist-title" id="artist"> artist : {{ songDetails[currentSongIndex]?.artist | defaultName }}</p>
-<div class="progress-info-container">
-    <div class="time-info">
-        {{ formatTime(audio.currentTime || 0) }} 
+    
+    <p class="album-title" id="album-title"> album : {{ songDetails[currentSongIndex]?.album  }}</p>
+    <p class="song-title"  id="title"> song title : {{ songDetails[currentSongIndex]?.name  }}
+    
+    <p class="artist-title" id="artist"> artist : {{ songDetails[currentSongIndex]?.artist  }}</p>
+
+    <div class="progress-info-container">
+      <div class="time-info">
+          {{ formatTime(audio.currentTime || 0) }} 
       </div>
       <div class="progress-container" id="progress-container"
-     (mousedown)="onMouseDown($event)"
-     (mousemove)="onMouseMove($event)"
-     (mouseup)="onMouseUp()">
-  <div class="progress" id="progress" [style.width]="progress + '%'"></div>
-  <div class="current-time-circle" [style.left]="progress + '%'"></div>
-</div>
-      
+       (mousedown)="onMouseDown($event)"
+       (mousemove)="onMouseMove($event)"
+       (mouseup)="onMouseUp()">     
+      <div class="progress" id="progress" [style.width]="progress + '%'"></div>
+      <div class="current-time-circle" [style.left]="progress + '%'"></div>
+    </div>
+  
     <div class="time-info">
         {{ formatTime(audio.duration || 0) }}
     </div>
@@ -29,7 +34,7 @@
         <i class="fa fa-volume-up" aria-hidden="true"></i>
         <input type="range" background-color="red" class="volume-slider"  [value]="audio.volume * 100"  (input)="updateVolume($event)">
     </div>
-  
+    
    
 </div>
     <audio [src]="audio.src" id="audio"></audio>
