@@ -38,7 +38,7 @@ import { DefaultNamePipe } from './pipes/default-name.pipe';
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        ToastrModule.forRoot(),
+        ToastrModule.forRoot({preventDuplicates: true}),
         BrowserAnimationsModule,
     ]
 })

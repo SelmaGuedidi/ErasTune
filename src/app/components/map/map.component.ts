@@ -20,7 +20,7 @@ export class MapComponent {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     this.mapService.decadeClicked$.subscribe((value) => {
-      this.mapService.loadMapData(value,windowWidth,windowHeight);
+      this.mapService.loadMapData(value);
     });
     
     console.log('Window Width:', windowWidth);
