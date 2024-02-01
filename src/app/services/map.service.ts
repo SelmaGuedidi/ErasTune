@@ -7,19 +7,15 @@ import { MusicPlayerService } from './music-player.service';
 import { ToastrService } from 'ngx-toastr';
 
 
-
-
-
 @Injectable({
   providedIn: 'root'
 })
 
 export class MapService {
   private countriesGroup: any;
-
   countryClickedSource = new BehaviorSubject<string[] | null>(null);
-countryClicked$ = this.countryClickedSource.asObservable(); 
-  
+  countryClicked$ = this.countryClickedSource.asObservable();
+
   decadeClickedSource = new BehaviorSubject<number>(1980);
   decadeClicked$ = this.decadeClickedSource.asObservable();
 
@@ -35,11 +31,11 @@ countryClicked$ = this.countryClickedSource.asObservable();
   }
   decade:number=1980
   constructor(private http: HttpClient, private toast: ToastrService) {
-    
+
   }
-  
+
   musicPlayerService = inject(MusicPlayerService);
-  
+
   loadMapData(value,windowWidth, windowHeight): void {
     // Use the latest value from decadeClicked$ in the URL
     console.log(`world_${this.country_to_json[value]}.geojson`)
@@ -86,7 +82,7 @@ countryClicked$ = this.countryClickedSource.asObservable();
     .append('g')
     .attr('transform', 'translate(-200, 0)');
 
-      
+
   let body=d3.select("body")
   .style("width", w)
   .style("height", h+200)
@@ -110,7 +106,7 @@ countryClicked$ = this.countryClickedSource.asObservable();
     return randomColor;
       })
       .style('stroke', '#2A2C39') // Set the stroke color
-  .style('stroke-width', '0.5')
+      .style('stroke-width', '0.5')
       .attr('d', (d: any) => path(d) as string)
       .attr('id', (d: any) => { /*console.log(d.properties.NAME);return 'country' + d.properties.NAME?d.properties.NAME:""*/})
       .attr('class', 'country')
@@ -123,7 +119,13 @@ countryClicked$ = this.countryClickedSource.asObservable();
       .on('click', (d: any) => {
         var countryABBREVN = d.srcElement.__data__.properties.ABBREVN ? d.srcElement.__data__.properties.ABBREVN : ''
         if (countryABBREVN == ''){
+<<<<<<< HEAD
           this.toast.error("coutnry not found")       
+=======
+
+          this.toast.error("coutnry not found")
+
+>>>>>>> d8cfec1a026eaf256c4616d72abc3b1c1af1d089
         }
         else {
           console.log("acessing music player service in", this.decadeClickedSource.value ,"for ",countryABBREVN);``

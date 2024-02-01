@@ -26,12 +26,18 @@
     "@angular/platform-browser-dynamic": "^17.1.1",
     "@angular/router": "^17.1.1",
     "@material/slider": "^14.0.0",
+<<<<<<< HEAD
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.2",
+=======
+    "chatgpt-api": "^0.0.6",
+>>>>>>> d8cfec1a026eaf256c4616d72abc3b1c1af1d089
     "d3": "^7.8.5",
     "font-awesome": "^4.7.0",
     "ngx-toastr": "^18.0.0",
+    "openai": "^4.26.0",
+    "primeng": "^17.4.0",
     "rxjs": "~7.8.0",
     "sass-loader": "^14.1.0",
     "slider": "^1.0.4",
