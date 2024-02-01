@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { MusicPlayerService } from './music-player.service';
 
 import { ToastrService } from 'ngx-toastr';
+import { DidyouknowFactService } from './did-you-know-fact.service';
 
 
 
@@ -34,19 +35,20 @@ countryClicked$ = this.countryClickedSource.asObservable();
 
   }
   decade:number=1980
-  constructor(private http: HttpClient, private toast: ToastrService) {
+  constructor(private http: HttpClient, private toast: ToastrService,private didYouKnowFactService: DidyouknowFactService) {
     
   }
   
   musicPlayerService = inject(MusicPlayerService);
   
-  loadMapData(value,windowWidth, windowHeight): void {
+  loadMapData(value): void {
     // Use the latest value from decadeClicked$ in the URL
+    //console.log(this.didYouKnowFactService.getDidYouKnow("Tunisia",1999))
     console.log(`world_${this.country_to_json[value]}.geojson`)
     this.http
       .get(`https://raw.githubusercontent.com/SelmaGuedidi/ErasTune/dev/src/assets/maps/world_${this.country_to_json[value]}.geojson`)
       .subscribe((json: any) => {
-        this.drawMap(json, windowWidth, windowHeight);
+        this.drawMap(value,json);
       });
   }
   removePrevMap():void{
@@ -54,7 +56,7 @@ countryClicked$ = this.countryClickedSource.asObservable();
     mapHolder.select('svg').remove();
   }
 
-  private drawMap(json: any,windowWidth, windowHeight): void {
+  private drawMap(value:number,json: any): void {
     this.removePrevMap()
     const w = 1650;
     const h = 750;
@@ -117,10 +119,9 @@ countryClicked$ = this.countryClickedSource.asObservable();
       .on('mouseover', (event, d: any) => {
         const countryName = d.properties.NAME ? d.properties.NAME : '';
         this.showTooltip(countryName, event);
-        const hoveredCountryId = 'country' + d.properties.NAME;
-        d3.select(`#${hoveredCountryId}`).attr('fill', '#f4bcbc');
+        
       })
-      .on('click', (d: any) => {
+      .on('click', async (d: any) => {
         var countryABBREVN = d.srcElement.__data__.properties.ABBREVN ? d.srcElement.__data__.properties.ABBREVN : ''
         if (countryABBREVN == ''){
 
@@ -130,10 +131,23 @@ countryClicked$ = this.countryClickedSource.asObservable();
         else {
           console.log("acessing music player service in", this.decadeClickedSource.value ,"for ",countryABBREVN);``
           var countryName = d.srcElement.__data__.properties.NAME ? d.srcElement.__data__.properties.NAME : ''
-          // Define the observable without subscribing
+       
           this.countryClickedSource.next([countryName,countryABBREVN]);
-          // console.log(this.countryClicked$)
-          // console.log(this.countryClickedSource)
+         
+        }
+        try {
+          const didYouKnowFact = await this.didYouKnowFactService.getDidYouKnow(countryName,value);
+        
+          if (didYouKnowFact) {
+            this.toast.info(didYouKnowFact, 'Fun Fact', {
+              positionClass: 'toast-bottom-right',
+              timeOut: 25500,
+             
+              
+          });
+          } 
+        } catch (error) {
+          this.toast.error("Failed to fetch information");
         }
 
       })
