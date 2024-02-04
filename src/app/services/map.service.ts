@@ -74,6 +74,7 @@ export class MapService {
     .attr('height', h)
     .style("overflow", "hidden")
       .append('svg')
+      .attr('id','svg')
       .attr('width', w)
       .attr('height', h+100)
 
@@ -84,6 +85,7 @@ export class MapService {
             this.countriesGroup.attr('transform', `translate(${x - 200}, ${y}) scale(${k})`);
         }.bind(this)))
     .append('g')
+    .attr('id','g')
     .attr('transform', 'translate(-200, 0)');
 
 
@@ -112,11 +114,16 @@ export class MapService {
       .style('stroke', '#2A2C39') // Set the stroke color
       .style('stroke-width', '0.5')
       .attr('d', (d: any) => path(d) as string)
-      .attr('id', (d: any) => { /*console.log(d.properties.NAME);return 'country' + d.properties.NAME?d.properties.NAME:""*/})
+      .attr('id', (d: any) => { /*console.log(d.properties.NAME);*/return  d.properties.NAME?d.properties.NAME:""})
       .attr('class', 'country')
       .on('mouseover', (event, d: any) => {
         const countryName = d.properties.NAME ? d.properties.NAME : '';
         this.showTooltip(countryName, event);
+
+       
+if(countryName)
+        d3.select(`#${countryName}`).attr('fill','#c4b0c0')
+        
 
       })
       .on('click', async (d: any) => {
@@ -127,7 +134,7 @@ export class MapService {
 
         }
         else {
-          // console.log("acessing music player service in", this.decadeClickedSource.value ,"for ",countryABBREVN);``
+
           var countryName = d.srcElement.__data__.properties.NAME ? d.srcElement.__data__.properties.NAME : ''
 
           this.countryClickedSource.next([countryName,countryABBREVN]);
@@ -135,14 +142,14 @@ export class MapService {
         }
 
       })
-      .on('mouseout', () => {
+      .on('mouseout', (d: any) => {
         this.hideTooltip();
+        if(d.srcElement.__data__.properties.NAME)
+        d3.select(`#${d.srcElement.__data__.properties.NAME}`).attr('fill',countryColors[Math.floor(Math.random() * countryColors.length)])
 
       });
   }
-  private zoomed(event: any): void {
-    this.countriesGroup.attr('transform', event.transform);
-  }
+  
   private showTooltip(countryName: string, event: MouseEvent): void {
     const tooltip = d3.select('#tooltip');
     tooltip.html(countryName)
