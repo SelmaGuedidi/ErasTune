@@ -57,13 +57,13 @@ export class MapComponent implements OnDestroy {
   }
 
   private showFunFactToast(): void {
-    this.didyouknowFactService.getDidYouKnow(this.currentCountry, this.currentDecade)
-      .pipe(take(1))
-      .subscribe(didYouKnowFact => {
-        this.toast.info(didYouKnowFact, 'Fun Fact', {
-          positionClass: 'toast-bottom-right',
-          timeOut: 25500,
-        });
-      });
+    // this.didyouknowFactService.getDidYouKnow(this.currentCountry, this.currentDecade)
+    //   .pipe(take(1))
+    //   .subscribe(didYouKnowFact => {
+    //     this.toast.info(didYouKnowFact, 'Fun Fact', {
+    //       positionClass: 'toast-bottom-right',
+    //       timeOut: 25500,
+    //     });
+    //   });
   }
 }

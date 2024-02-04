@@ -50,7 +50,7 @@ export class MusicplayerComponent {
       // console.log("in country observer")
       // console.log("country changed : ", country)
       var decade = this.mapService.decadeClickedSource.value
-      this.mapService.countryClicked$.subscribe(([country, abrv]) => {
+      // this.mapService.countryClicked$.subscribe(([country, abrv]) => {
         // console.log('in country observer');
         // console.log('country changed : ', country);
         var decade = this.mapService.decadeClickedSource.value;
@@ -86,7 +86,7 @@ export class MusicplayerComponent {
           .subscribe(() => {
             this.changeSong();
           });
-      });
+      // });
     })
 
 
