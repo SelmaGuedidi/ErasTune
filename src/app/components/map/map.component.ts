@@ -57,6 +57,7 @@ export class MapComponent implements OnDestroy {
   }
 
   private showFunFactToast(): void {
+
    /* this.didyouknowFactService.getDidYouKnow(this.currentCountry, this.currentDecade)
       .pipe(take(1))
       .subscribe(didYouKnowFact => {
@@ -65,5 +66,6 @@ export class MapComponent implements OnDestroy {
           timeOut: 20500,
         });
       });*/
+
   }
 }
