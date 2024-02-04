@@ -28,29 +28,24 @@ export class MusicplayerComponent {
   songs: Song[] = [];
   songSources: string[] = [];
 
-  mapService = inject(MapService)
-  musicPlayerService = inject(MusicPlayerService)
-  toast= inject(ToastrService)
   private modalService = inject (NgbModal)
 
   openPopup(type : string) {
 
-    const modalRef = this.modalService.open(PopupComponent);
-    if (type == "artist"){
+
+    const modalRef = this.modalService.open(PopupComponent, { centered: true });
+
       modalRef.componentInstance.artist = this.songs[this.currentSongIndex].details.artist;
-    }
-    else if (type == "album"){
-      modalRef.componentInstance.album_title = this.songs[this.currentSongIndex].details.album;
-    }
+    
   }
-  constructor(){
+  constructor(private mapService :MapService,private musicPlayerService :MusicPlayerService,private toast :ToastrService){
 
     this.mapService.countryClicked$.subscribe(([country,abrv]) => {
 
       // console.log("in country observer")
       // console.log("country changed : ", country)
       var decade = this.mapService.decadeClickedSource.value
-      this.mapService.countryClicked$.subscribe(([country, abrv]) => {
+      // this.mapService.countryClicked$.subscribe(([country, abrv]) => {
         // console.log('in country observer');
         // console.log('country changed : ', country);
         var decade = this.mapService.decadeClickedSource.value;
@@ -86,7 +81,7 @@ export class MusicplayerComponent {
           .subscribe(() => {
             this.changeSong();
           });
-      });
+      // });
     })
 
 

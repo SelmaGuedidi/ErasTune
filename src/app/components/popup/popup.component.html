@@ -2,29 +2,29 @@
   <div class="img-container">
     <img [src]="artist_image" alt="artist-image" id="cover">
   </div>
-  <h1 mat-dialog-title> artist Name : {{ artist }}</h1>
+  <p class="ind-song" mat-dialog-title> Artist name :  <span>{{ artist }}</span></p>
 
   <div mat-dialog-content>
-   
 
-    <p *ngIf="artist_popularity != 0"> artist popularity  : {{ artist_popularity }}</p>
 
-    <p *ngIf="artist_genres != []" > artist genres  :
+    <p  class="ind-song" *ngIf="artist_popularity != 0"> Artist popularity  :  <span>{{ artist_popularity }}</span></p>
+
+    <p  class="ind-song" *ngIf="artist_genres != []" > Artist genres  :
       <span *ngFor="let genre of artist_genres">
-        {{ genre }}
+        <span>{{ genre }}</span>
       </span>
 
     </p>
 
-    <p *ngIf="artist_spotify_uri != ''">
-
-      <a href="#" (click)="openSpotifyUrl($event, artist_spotify_uri)" target="_blank">artist url</a>
+    <p  class="ind-song" *ngIf="artist_spotify_uri != ''">
+      Artist url: 
+      <a class="url" href="#" (click)="openSpotifyUrl($event, artist_spotify_uri)" target="_blank">{{artist_spotify_uri}}</a>
 
     </p>
   </div>
 </div>
 
-<div class="popup" *ngIf="album_title != ''">
+<!-- <div class="popup" *ngIf="album_title != ''">
   <div class="img-container">
 
     <img  [src]="album_image" alt="album-image" id="cover">
@@ -45,4 +45,4 @@
 
     </p>
   </div>
-</div>
+</div> -->
