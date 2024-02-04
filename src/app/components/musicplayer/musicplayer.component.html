@@ -5,11 +5,10 @@
       <img  [src]="songs[currentSongIndex]?.image | defaultImage" alt="music-cover" id="cover">
       
     </div>
-    <p (click)="openPopup('album')" class="album-title" id="album-title">{{ songs[currentSongIndex]?.details.album | defaultName  }}</p>
+   
 
-
-    <p class="song-title"  id="title">{{ songs[currentSongIndex]?.details.name | defaultName }}</p>
-    <p class="artist-title"(click)="openPopup('artist')" id="artist">{{ songs[currentSongIndex]?.details.artist | defaultName }}</p>
+    <p class="ind-song">Song: <span class="song-title"  id="title">{{ songs[currentSongIndex]?.details.name | defaultName }} </span> (<span class="ind">Album: <span class="song-title" id="album-title">{{ songs[currentSongIndex]?.details.album | defaultName  }} </span></span>)</p>
+      <p class="ind">By: <span class="artist-title"(click)="openPopup('artist')" id="artist">{{ songs[currentSongIndex]?.details.artist | defaultName }} </span></p>
 <div class="progress-info-container">
     <div class="time-info">
         {{ formatTime(audio.currentTime || 0) }}
