@@ -61,9 +61,7 @@ export class PopupComponent {
     const spotifyUrl = this.getSpotifyUrlFromUri(uri);
     window.open(spotifyUrl, '_blank');
   }
-
-
-  private getSpotifyUrlFromUri(uri: string): string {
+private getSpotifyUrlFromUri(uri: string): string {
     // Assuming the URI format is "spotify:album:2up3OPMp9Tb4dAKM2erWXQ"
     const parts = uri.split(':');
     const type = parts[1]; // "album", "artist", etc.
@@ -72,7 +70,8 @@ export class PopupComponent {
     // Build the Spotify URL
     return `https://open.spotify.com/${type}/${id}`;
 
-    // Sanitize the URL to make it safe for use in href
-    // return this.sanitizer.bypassSecurityTrustResourceUrl(spotifyUrl);
+    
   }
+
 }
+  
