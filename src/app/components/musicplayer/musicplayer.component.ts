@@ -32,13 +32,11 @@ export class MusicplayerComponent {
 
   openPopup(type : string) {
 
-    const modalRef = this.modalService.open(PopupComponent);
-    // if (type == "artist"){
+
+    const modalRef = this.modalService.open(PopupComponent, { centered: true });
+
       modalRef.componentInstance.artist = this.songs[this.currentSongIndex].details.artist;
-    // }
-    // else if (type == "album"){
-    //   modalRef.componentInstance.album_title = this.songs[this.currentSongIndex].details.album;
-    // }
+    
   }
   constructor(private mapService :MapService,private musicPlayerService :MusicPlayerService,private toast :ToastrService){
 
