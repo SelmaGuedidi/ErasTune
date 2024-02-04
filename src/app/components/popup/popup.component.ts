@@ -14,7 +14,6 @@ export class PopupComponent {
   @Input() album_title : string = '' ;
   @Input() artist : string = '';
 
-  sas = inject(SpotifyapiService)
 
   artist_image: string ='';
   artist_popularity: number = 0;
@@ -26,21 +25,22 @@ export class PopupComponent {
   album_release_date: any;
   album_total_tracks: number = 0;
   sanitizer: any;
-  constructor() {}
+
+  constructor(private sas: SpotifyapiService) {}
 
   ngOnInit(): void {
 
 
-      if (this.album_title != ''){
-      this.sas.searchAlbum(this.album_title).subscribe(album => {
-      // this.album_popularity = album.albums.items[0].popularity;
-      this.album_spotify_uri = album.albums.items[0].uri;
-      this.album_image = album.albums.items[0].images[0].url;
-      this.album_release_date = album.albums.items[0].release_date;
-      this.album_total_tracks = album.albums.items[0].total_tracks;
-      console.log(this.album_title)
+    //   if (this.album_title != ''){
+    //   this.sas.searchAlbum(this.album_title).subscribe(album => {
+    //   // this.album_popularity = album.albums.items[0].popularity;
+    //   this.album_spotify_uri = album.albums.items[0].uri;
+    //   this.album_image = album.albums.items[0].images[0].url;
+    //   this.album_release_date = album.albums.items[0].release_date;
+    //   this.album_total_tracks = album.albums.items[0].total_tracks;
+    //   console.log(this.album_title)
 
-    });}
+    // });}
     if (this.artist != ''){
 
       this.sas.searchArtist(this.artist).subscribe(artist => {
@@ -70,8 +70,8 @@ private getSpotifyUrlFromUri(uri: string): string {
     // Build the Spotify URL
     return `https://open.spotify.com/${type}/${id}`;
 
-    
+
   }
 
 }
-  
+
