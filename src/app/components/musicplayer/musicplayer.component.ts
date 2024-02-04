@@ -1,6 +1,6 @@
 import { MapService } from 'src/app/services/map.service';
 import { Component, inject } from '@angular/core';
-import { Observable, catchError, map, of, tap } from 'rxjs';
+import { catchError, map, of } from 'rxjs';
 import { MusicPlayerService } from 'src/app/services/music-player.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -32,9 +32,9 @@ export class MusicplayerComponent {
   musicPlayerService = inject(MusicPlayerService)
   toast= inject(ToastrService)
   private modalService = inject (NgbModal)
-  
+
   openPopup(type : string) {
-  
+
     const modalRef = this.modalService.open(PopupComponent);
     if (type == "artist"){
       modalRef.componentInstance.artist = this.songs[this.currentSongIndex].details.artist;
@@ -47,12 +47,12 @@ export class MusicplayerComponent {
 
     this.mapService.countryClicked$.subscribe(([country,abrv]) => {
 
-      console.log("in country observer")
-      console.log("country changed : ", country)
+      // console.log("in country observer")
+      // console.log("country changed : ", country)
       var decade = this.mapService.decadeClickedSource.value
       this.mapService.countryClicked$.subscribe(([country, abrv]) => {
-        console.log('in country observer');
-        console.log('country changed : ', country);
+        // console.log('in country observer');
+        // console.log('country changed : ', country);
         var decade = this.mapService.decadeClickedSource.value;
         this.musicPlayerService
           .getMusicByCountryAndYear(abrv, decade)
@@ -73,12 +73,12 @@ export class MusicplayerComponent {
                 this.songSources = this.songs.map((song) => song.source);
               } else {
                 this.toast.error(`${country} or ${decade} is empty for now`);
-                console.log(`${country} or ${decade} is empty for now`);
+                // console.log(`${country} or ${decade} is empty for now`);
                 this.songs = [];
               }
             }),
             catchError((error) => {
-              console.error('Error fetching data:', error);
+              // console.error('Error fetching data:', error);
               this.toast.error('error fetching data');
               return of([]); // Return an empty array or handle the error as needed
             })
@@ -92,8 +92,8 @@ export class MusicplayerComponent {
 
     this.mapService.decadeClicked$.subscribe((decade) => {
 
-      console.log("in decade observer")
-      console.log("decade changed : ", decade)
+      // console.log("in decade observer")
+      // console.log("decade changed : ", decade)
       const [countryName, countryAbrv]  = this.mapService.countryClickedSource.value
       this.musicPlayerService.getMusicByCountryAndYear(countryAbrv,decade).pipe(
         map(songs => {
@@ -113,12 +113,12 @@ export class MusicplayerComponent {
         }
           else {
             this.toast.error(`${countryName} or ${decade} is empty for now`);
-            console.log(`${countryName} or ${decade} is empty for now`);
+            // console.log(`${countryName} or ${decade} is empty for now`);
             this.songs = [];
           }
         }),
         catchError(error => {
-        console.error("Error fetching data:", error);
+        // console.error("Error fetching data:", error);
         this.toast.error("error fetching data")
         return of([]);  // Return an empty array or handle the error as needed
         })
@@ -205,7 +205,7 @@ export class MusicplayerComponent {
     return `${formattedMinutes}:${formattedSeconds}`;
   }
 
-  
+
 
 
 }
