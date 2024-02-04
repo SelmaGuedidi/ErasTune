@@ -28,7 +28,6 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/logo.png",
-              "src/logoTab.png",
               "src/assets"
             ],
             "styles": [
