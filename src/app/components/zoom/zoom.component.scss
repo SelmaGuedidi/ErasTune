@@ -16,8 +16,8 @@ body {
   }
 
   .btn {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background: #FFF;
     border: 1px solid #7cc0d8;
     border-radius: 50%;
@@ -54,12 +54,13 @@ body {
   .zoom-init{
 
     bottom: 260px;
-    margin-bottom: 30px;
+    
   }
 
 
-  a.btn.zoom i,
-  a.btn.zoom-out i,
-  a.btn.zoom-init i  {
-    padding-top: -300px !important;
+ 
+
+.fix{
+  margin-top: -8px;
+  
 }

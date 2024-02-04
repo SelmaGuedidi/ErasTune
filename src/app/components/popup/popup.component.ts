@@ -2,6 +2,7 @@ import { Component, Input, inject } from '@angular/core';
 import { Song } from 'src/app/Models/song';
 import { SpotifyapiService } from 'src/app/services/spotifyapi.service';
 import { NgFor,NgIf } from '@angular/common';
+import { SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-popup',
@@ -26,6 +27,7 @@ export class PopupComponent {
   album_image: string;
   album_release_date: any;
   album_total_tracks: number = 0;
+  sanitizer: any;
   constructor() {}
   
   ngOnInit(): void {
@@ -55,6 +57,26 @@ export class PopupComponent {
     
     });
     
+  }
+  openSpotifyUrl(uri: string): void {
+    // Convert Spotify URI to URL
+    const spotifyUrl = this.getSpotifyUrlFromUri(uri);
+    // Open the URL in a new tab
+    window.open(spotifyUrl.toString(), '_blank');
+  }
+
+  private getSpotifyUrlFromUri(uri: string): SafeResourceUrl {
+    // Assuming the URI format is "spotify:album:2up3OPMp9Tb4dAKM2erWXQ"
+    const parts = uri.split(':');
+    const type = parts[1]; // "album", "artist", etc.
+    const id = parts[2]; // The unique identifier
+
+    // Build the Spotify URL
+    console.log(`https://open.spotify.com/${type}/${id}`);
+    const spotifyUrl = `https://open.spotify.com/${type}/${id}`;
+
+    // Sanitize the URL to make it safe for use in href
+    return this.sanitizer.bypassSecurityTrustResourceUrl(spotifyUrl);
   }
 
 }

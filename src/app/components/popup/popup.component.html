@@ -1,41 +1,35 @@
 <div class="popup" *ngIf="artist != ''">
   <div class="img-container">
-    <img  [src]="artist_image" alt="artist-image" id="cover">
-
+    <img [src]="artist_image" alt="artist-image" id="cover">
   </div>
   <h1 mat-dialog-title> artist Name : {{ artist }}</h1>
 
   <div mat-dialog-content>
+    <p *ngIf="artist_popularity != 0"> artist popularity : {{ artist_popularity }}</p>
 
-    <p *ngIf="artist_popularity != 0"> artist popularity  : {{ artist_popularity }}</p>
-    
-    <p *ngIf="artist_genres != []" > artist genres  : 
-      <span *ngFor="let genre of artist_genres">
-        {{ genre }}
-      </span>
+    <p *ngIf="artist_genres && artist_genres.length > 0"> artist genres :
+      <span *ngFor="let genre of artist_genres">{{ genre }}</span>
     </p>
+
     <p *ngIf="artist_spotify_uri != ''">
-      <a href="{{ artist_spotify_uri }}" target="_blank">artist url</a>
+      <a href="#" (click)="openSpotifyUrl(artist_spotify_uri)" target="_blank">artist url</a>
+
     </p>
   </div>
 </div>
 
 <div class="popup" *ngIf="album_title != ''">
   <div class="img-container">
-    <img  [src]="album_image" alt="album-image" id="cover">
-   
+    <img [src]="album_image" alt="album-image" id="cover">
   </div>
-  <h1 mat-dialog-title>
-    
-     album  : {{ album_title }}</h1>
+  <h1 mat-dialog-title> album : {{ album_title }}</h1>
 
   <div mat-dialog-content>
+    <p *ngIf="album_release_date"> album release date : {{ album_release_date }}</p>
+    <p *ngIf="album_total_tracks != 0"> total tracks : {{ album_total_tracks }}</p>
 
-    <p *ngIf="album_release_date"> album release date  : {{ album_release_date }}</p>
-    <p *ngIf="album_total_tracks != 0"> total tracks  : {{ album_total_tracks }}</p>
-    <!-- <p> album popularity  : {{ album_popularity }}</p> -->
     <p *ngIf="album_spotify_uri != ''">
-      <a href="{{ album_spotify_uri }}" target="_blank">album url</a>
+      <a href="#" (click)="openSpotifyUrl(album_spotify_uri)" target="_blank">album url</a>
     </p>
   </div>
 </div>
