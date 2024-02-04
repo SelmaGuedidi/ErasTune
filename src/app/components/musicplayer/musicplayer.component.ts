@@ -35,8 +35,8 @@ export class MusicplayerComponent {
 
   openPopup(type : string) {
 
-    const modalRef = this.modalService.open(PopupComponent);
-    if (type == "artist"){
+    const modalRef = this.modalService.open(PopupComponent, { centered: true });
+        if (type == "artist"){
       modalRef.componentInstance.artist = this.songs[this.currentSongIndex].details.artist;
     }
     else if (type == "album"){
