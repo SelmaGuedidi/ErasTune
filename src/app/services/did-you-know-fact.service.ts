@@ -7,7 +7,8 @@ import { Observable, catchError, map } from 'rxjs';
 })
 export class DidyouknowFactService {
   private apiUrl = 'https://api.edenai.run/v2/text/question_answer';
-
+  private apiUrl2 = 'https://api.edenai.run/v2/text/question_answer';
+  private apiUrl3 = 'https://api.edenai.run/v2/text/question_answer';
   constructor(private http: HttpClient) {}
 
   getDidYouKnow(country: string, decade: number): Observable<string> {
