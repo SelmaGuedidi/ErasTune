@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map } from 'rxjs';
-import { environment } from '../../environments/environment.prod';
+//import { environment } from '../../environments/environment.prod';
 
 
 @Injectable({
@@ -12,7 +12,7 @@ export class DidyouknowFactService {
   constructor(private http: HttpClient) {}
 
   getDidYouKnow(country: string, decade: number): Observable<string> {
-    const apiKey: string = environment.API_KEY;
+    const apiKey: string = process.env['API_KEY'];
 console.log(apiKey);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
