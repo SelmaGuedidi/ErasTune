@@ -10,7 +10,7 @@
     "start": "ng serve",
     "config":"ts-node ./src/assets/setEnv.ts",
     "build": "ng build",
-    "build:prod": "ng run config -- --environment=prod && ng build --configuration production --base-href https://SelmaGuedidi.github.io/ErasTune/",
+    "build:prod": "npm run config -- --environment=prod && ng build --configuration production --base-href https://SelmaGuedidi.github.io/ErasTune/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:headless": "ng test --watch=false --browsers=ChromeHeadless"
