@@ -18,6 +18,8 @@ export class SpotifyapiService {
     if (!this.token) {
       const SPOTIFY_CLIENT_ID = environment.SPOTIFY_CLIENT_ID;
       const SPOTIFY_API_KEY = environment.SPOTIFY_API_KEY;
+      console.log(SPOTIFY_CLIENT_ID);
+      console.log(SPOTIFY_API_KEY);
       const authHeader = btoa(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_API_KEY}`);
       const headers = new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
