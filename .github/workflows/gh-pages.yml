@@ -12,6 +12,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
@@ -22,7 +23,11 @@ jobs:
 
     - name: Build
       run: npm run build:prod
-
+    - name: Set
+      run: |
+          echo "API_KEY=${{ secrets.API_KEY }}" >> .env
+          echo "SPOTIFY_API_KEY=${{ secrets.SPOTIFY_API_KEY }}" >> .env
+          echo "SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }}" >> .env
     - name: Deploy
       if: success()
       uses: peaceiris/actions-gh-pages@v3
@@ -33,9 +38,6 @@ jobs:
         SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
         publish_dir: dist/ErasTune
         enable_jekyll: true
-        run: |
-            echo "API_KEY=$API_KEY" >> .env
-            echo "SPOTIFY_API_KEY=$SPOTIFY_API_KEY" >> .env
-            echo "SPOTIFY_CLIENT_ID=$SPOTIFY_CLIENT_ID" >> .env
+
 
       
