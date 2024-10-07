@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 
 @Injectable({
@@ -8,12 +9,10 @@ import { Observable, catchError, map } from 'rxjs';
 })
 export class DidyouknowFactService {
   private apiUrl = 'https://api.edenai.run/v2/text/question_answer';
-  private apiUrl2 = 'https://api.edenai.run/v2/text/question_answer';
-  private apiUrl3 = 'https://api.edenai.run/v2/text/question_answer';
   constructor(private http: HttpClient) {}
 
   getDidYouKnow(country: string, decade: number): Observable<string> {
-    const apiKey: string = `${process.env['API_KEY']}`;
+    const apiKey: string = environment.API_KEY;
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
