@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapService } from './services/map.service';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ZoomComponent } from "./components/zoom/zoom.component";
 import { ZoomService } from './services/zoom.service';
 import { MapComponent } from './components/map/map.component';
@@ -20,8 +20,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AppComponent,
         ZoomComponent,
         MapComponent,
@@ -32,19 +31,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         DefaultImagePipe,
         DefaultNamePipe,
     ],
-    providers: [MapService,ZoomService, provideAnimationsAsync()],
     bootstrap: [
         AppComponent,
-    ],
-    imports: [
-        BrowserModule,
+    ], imports: [BrowserModule,
         AppRoutingModule,
-        HttpClientModule,
-        ToastrModule.forRoot({preventDuplicates: true}),
+        ToastrModule.forRoot({ preventDuplicates: true }),
         BrowserAnimationsModule,
-        NgbModule
-    ]
-})
+        NgbModule], providers: [MapService, ZoomService, provideAnimationsAsync(), provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
 
 }
