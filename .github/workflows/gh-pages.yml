@@ -19,7 +19,7 @@ jobs:
         SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
       run: |
           export API_KEY=$API_KEY
-          export "SPOTIFY_API_KEY=$SPOTIFY_API_KEY
+          export SPOTIFY_API_KEY=$SPOTIFY_API_KEY
           export SPOTIFY_CLIENT_ID=$SPOTIFY_CLIENT_ID
 
     - name: Setup Node.js
