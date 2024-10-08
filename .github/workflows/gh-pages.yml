@@ -15,11 +15,11 @@ jobs:
         API_KEY: ${{ secrets.API_KEY }}
         SPOTIFY_API_KEY: ${{ secrets.SPOTIFY_API_KEY }}
         SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
-        script: |
+        run: |
           echo "$SPOTIFY_CLIENT_ID" 
-          echo "API_KEY=${#API_KEY}" >> .env
-          echo "SPOTIFY_API_KEY=${#SPOTIFY_API_KEY}" >> .env
-          echo "SPOTIFY_CLIENT_ID=${#SPOTIFY_CLIENT_ID}" >> .env
+          echo "API_KEY=$API_KEY}" >> .env
+          echo "SPOTIFY_API_KEY=$SPOTIFY_API_KEY" >> .env
+          echo "SPOTIFY_CLIENT_ID=$SPOTIFY_CLIENT_ID" >> .env
 
 
     - name: Setup Node.js

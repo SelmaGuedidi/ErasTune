@@ -7,7 +7,7 @@ import { BehaviorSubject, delay } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'Eras Tune';
+  title = 'ErasTune';
   showSplashScreen = true;
 
   showSplashScreen$ = new BehaviorSubject<boolean>(true);
