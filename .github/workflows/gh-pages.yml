@@ -22,6 +22,7 @@ jobs:
           echo "API_KEY=$API_KEY" >> .env
           echo "SPOTIFY_API_KEY=$SPOTIFY_API_KEY" >> .env
           echo "SPOTIFY_CLIENT_ID=$SPOTIFY_CLIENT_ID" >> .env
+          cat .env
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
