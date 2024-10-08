@@ -13,7 +13,7 @@ export class DidyouknowFactService {
 
   getDidYouKnow(country: string, decade: number): Observable<string> {
     const apiKey: string = process.env['API_KEY'];
-console.log(apiKey);
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${apiKey}`,
