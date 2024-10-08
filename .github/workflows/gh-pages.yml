@@ -18,9 +18,10 @@ jobs:
         SPOTIFY_API_KEY: ${{ secrets.SPOTIFY_API_KEY }}
         SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
       run: |
-          export API_KEY=$API_KEY
-          export SPOTIFY_API_KEY=$SPOTIFY_API_KEY
-          export SPOTIFY_CLIENT_ID=$SPOTIFY_CLIENT_ID
+          echo $API_KEY
+          SET API_KEY=$API_KEY
+          SET SPOTIFY_API_KEY=$SPOTIFY_API_KEY
+          SET SPOTIFY_CLIENT_ID=$SPOTIFY_CLIENT_ID
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -38,9 +39,6 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        API_KEY: ${{ secrets.API_KEY }}
-        SPOTIFY_API_KEY: ${{ secrets.SPOTIFY_API_KEY }}
-        SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
         publish_dir: dist/ErasTune
         enable_jekyll: true
 
