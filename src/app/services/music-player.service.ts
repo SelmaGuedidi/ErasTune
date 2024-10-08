@@ -13,7 +13,7 @@ export class MusicPlayerService {
 
   accessToken: string;
   complete_url : string
-  // API_KEY='AIzaSyADMRev8D_lIqhGLm9HAq0xhVnF5BlBgU0'
+ 
 
   API_URL = "https://erastune-75bd7-default-rtdb.firebaseio.com/"
   spotifyapiService: any;
